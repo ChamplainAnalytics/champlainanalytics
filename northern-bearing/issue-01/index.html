@@ -638,7 +638,22 @@
 
 
   @media (max-width: 780px) {
-    .sticky-nav-links { display: none; }
+    .sticky-nav-wordmark { display: none; }
+    .sticky-nav-issue { display: none; }
+    .sticky-nav-links {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
+    .sticky-nav-links::-webkit-scrollbar { display: none; }
+    .sticky-nav-links a {
+      font-size: 10px;
+      padding: 0 14px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
     .stats-row { grid-template-columns: repeat(2, 1fr); }
     .card-grid, .card-grid-3, .watch-grid { grid-template-columns: 1fr; }
     .event-card { grid-template-columns: 1fr; }
