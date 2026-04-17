@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Champlain Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,800;1,800&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A12;
+    --ink-2: #2A2A3A;
+    --ink-3: #5A5A72;
+    --paper: #F5F4F8;
+    --paper-2: #ECEAF2;
+    --paper-3: #DDDAE8;
+    --navy: #0D1B3E;
+    --violet: #6B5FD4;
+    --violet-light: #E8E6F8;
+    --rule: 1.5px solid #0A0A12;
+    --rule-light: 1px solid #DDDAE8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    padding: 0 40px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--violet);
+  }
+  .nav-wordmark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .nav-wordmark span { color: #8899cc; }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+  }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8899cc;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #fff; }
+
+  /* HERO */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 64px;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 700px;
+    margin-bottom: 24px;
+  }
+  .hero p {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink-2);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+
+  /* PUBLICATIONS GRID */
+  .publications {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+    width: 100%;
+  }
+  .pub-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 16px;
+    border-top: var(--rule);
+    padding-top: 24px;
+  }
+  .pub-grid {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+  }
+  .pub-card {
+    background: var(--paper);
+    padding: 36px 32px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+    transition: background 0.2s;
+  }
+  .pub-card:hover { background: var(--paper-2); }
+  .pub-card.active { background: var(--navy); }
+  .pub-card.active:hover { background: #0f2150; }
+  .pub-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+  .pub-card.active .pub-tag { background: var(--violet); color: #fff; }
+  .pub-card.inactive .pub-tag { background: var(--paper-3); color: var(--ink-3); }
+  .pub-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .pub-card.active .pub-name em { font-style: italic; color: #fff; }
+  .pub-card.active .pub-name em.violet { color: var(--violet-light); }
+  .pub-card.active .pub-name .sep { color: rgba(255,255,255,0.2); font-style: normal; font-size: 0.7em; vertical-align: middle; margin: 0 8px; }
+  .pub-card.inactive .pub-name { color: var(--ink-3); }
+  .pub-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .pub-card.active .pub-desc { color: #8899cc; }
+  .pub-card.inactive .pub-desc { color: var(--ink-3); }
+  .pub-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+  }
+  .pub-card.active .pub-meta { color: #5566aa; }
+  .pub-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--violet-light);
+    display: block;
+    margin-top: 20px;
+  }
+  .pub-card.inactive .pub-link { color: var(--ink-3); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 28px 40px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #5566aa;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 780px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 48px 20px 40px; }
+    .publications { padding: 0 20px 60px; }
+    .pub-grid { grid-template-columns: 1fr; }
+    footer { padding: 20px; flex-direction: column; text-align: center; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wordmark">Champlain <span>Analytics</span></div>
+  <div class="nav-links">
+    <a href="/northern-bearing/">Northern Bearing</a>
+    <a href="mailto:hello@champlainanalytics.ca">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-eyebrow">◆ Champlain Analytics · Toronto, ON</span>
+  <h1>Independent research for the Canadian investor.</h1>
+  <p>We publish weekly intelligence briefs built for self-directed Canadians who want to make smarter decisions with their TFSA, RRSP, and portfolio — without the noise.</p>
+</div>
+
+<div class="publications">
+  <span class="pub-label">Publications</span>
+  <div class="pub-grid">
+    <a href="/northern-bearing/" class="pub-card active">
+      <span class="pub-tag">◆ Active · Weekly</span>
+      <span class="pub-name"><em>Northern</em> <em class="violet">Bearing</em> <span class="sep">✦</span></span>
+      <p class="pub-desc">A Canadian-first weekly investment brief covering macro signals, sector rotation, ETFs, stock spotlights, GICs, currency, and what institutional money is doing — every Friday.</p>
+      <span class="pub-meta">Published Fridays · Canadian &amp; US Markets · Free to Read</span>
+      <span class="pub-link">Read the latest issue →</span>
+    </a>
+    <div class="pub-card inactive">
+      <span class="pub-tag">Coming Soon</span>
+      <span class="pub-name">More from Champlain</span>
+      <p class="pub-desc">Additional research publications are in development. Subscribe to Northern Bearing to be notified when new titles launch.</p>
+      <span class="pub-meta">In Development</span>
+      <span class="pub-link">Stay tuned →</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Champlain Analytics</span>
+  <span>champlainanalytics.ca</span>
+  <span>Not financial advice · For informational purposes only</span>
+</footer>
+
+</body>
+</html>
