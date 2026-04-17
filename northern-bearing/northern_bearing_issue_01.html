@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northern Bearing — Issue #1 — April 17, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,800;1,800&family=Cormorant+Sans:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A12;
+    --ink-2: #2A2A3A;
+    --ink-3: #5A5A72;
+    --paper: #F5F4F8;
+    --paper-2: #ECEAF2;
+    --paper-3: #DDDAE8;
+    --navy: #0D1B3E;
+    --navy-light: #D6DFF0;
+    --indigo: #2D2B8F;
+    --violet: #6B5FD4;
+    --violet-light: #E8E6F8;
+    --gold: #9A7B20;
+    --gold-light: #F5EDD4;
+    --green: #1A5C3A;
+    --green-light: #D4EDE0;
+    --red: #8B1A1A;
+    --red-light: #F5DADA;
+    --rule: 1.5px solid #0A0A12;
+    --rule-light: 1px solid #DDDAE8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+  h1, h2, h3, h4, .display { font-family: 'Cormorant Sans', sans-serif; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-block {
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+  }
+  .section-block:nth-child(1) { animation-delay: 0.05s; }
+  .section-block:nth-child(2) { animation-delay: 0.1s; }
+  .section-block:nth-child(3) { animation-delay: 0.15s; }
+  .section-block:nth-child(4) { animation-delay: 0.2s; }
+  .section-block:nth-child(5) { animation-delay: 0.25s; }
+  .section-block:nth-child(6) { animation-delay: 0.3s; }
+  .section-block:nth-child(7) { animation-delay: 0.35s; }
+  .section-block:nth-child(8) { animation-delay: 0.4s; }
+  .section-block:nth-child(9) { animation-delay: 0.45s; }
+  .section-block:nth-child(10) { animation-delay: 0.5s; }
+
+  /* MASTHEAD */
+  .masthead-meta {
+    background: var(--navy);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 10px 20px;
+    margin: 0 -20px;
+    text-transform: uppercase;
+  }
+  .masthead-title {
+    padding: 40px 0 20px;
+    border-bottom: var(--rule);
+  }
+  .masthead-title h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 800;
+    font-style: normal;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .masthead-title h1 em {
+    font-style: italic;
+    color: var(--ink);
+  }
+  .masthead-title h1 em.violet {
+    color: var(--violet);
+  }
+  .masthead-title h1 .sep {
+    color: var(--paper-3);
+    font-style: normal;
+    font-weight: 700;
+    margin: 0 12px;
+    font-size: 0.7em;
+    vertical-align: middle;
+  }
+  .masthead-deck {
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--ink-2);
+    max-width: 680px;
+    margin: 18px 0 0;
+    line-height: 1.7;
+  }
+  .masthead-deck strong { font-weight: 600; color: var(--ink); }
+  .topic-bar {
+    background: var(--ink);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    margin: 20px -20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .topic-sep { color: var(--violet); margin: 0 4px; }
+  .disclaimer-bar {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--ink-3);
+    padding: 10px 0;
+    border-bottom: var(--rule-light);
+  }
+
+  /* TICKERS ROW */
+  .tickers-section {
+    padding: 24px 0;
+    border-bottom: var(--rule-light);
+  }
+  .tickers-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 12px;
+  }
+  .pills-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+  .pill-active { background: var(--navy); color: #fff; }
+  .pill-secondary { background: var(--paper-2); color: var(--ink-2); border: 1px solid var(--paper-3); }
+  .pill-watch { background: var(--violet-light); color: var(--indigo); }
+  .pill-notable { background: var(--navy-light); color: var(--navy); }
+  .pill-conviction { background: var(--gold-light); color: var(--gold); }
+
+  /* STATS ROW */
+  .stats-row {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin: 24px 0;
+    border: 1px solid var(--ink);
+  }
+  .stat-cell {
+    background: var(--paper);
+    padding: 24px 20px;
+  }
+  .stat-number {
+    font-family: 'Cormorant Sans', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--violet);
+    line-height: 1.1;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin: 6px 0 4px;
+  }
+  .stat-sub { font-size: 12px; color: var(--ink-2); font-weight: 300; }
+
+  /* SECTION HEADERS */
+  .section-header {
+    position: relative;
+    padding: 48px 0 20px;
+    border-top: var(--rule);
+    margin-top: 40px;
+  }
+  .section-num {
+    font-family: 'Cormorant Sans', sans-serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: var(--paper-3);
+    position: absolute;
+    top: 20px;
+    right: 0;
+    line-height: 1;
+    user-select: none;
+    z-index: 0;
+  }
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* CARD GRIDS */
+  .card-grid {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    margin: 20px 0 0;
+  }
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card {
+    background: var(--paper);
+    padding: 22px 20px;
+  }
+  .card.highlight {
+    background: var(--navy);
+  }
+  .card.highlight .card-label { color: var(--violet-light); }
+  .card.highlight h4 { color: var(--paper); }
+  .card.highlight p { color: #b0b8d0; }
+  .card.watch-hl { background: var(--violet-light); }
+  .card.watch-hl .card-label { color: var(--indigo); }
+  .card.watch-hl h4 { color: var(--indigo); }
+  .card.watch-hl p { color: var(--indigo); }
+  .card-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .card h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .card p {
+    font-size: 13px;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* SOURCE LINKS */
+  .src {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--violet);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    word-break: break-all;
+  }
+  .src:hover { color: var(--ink); }
+
+  /* SO WHAT BAR */
+  .so-what {
+    border-left: 4px solid var(--violet);
+    background: var(--paper-2);
+    padding: 16px 20px;
+    margin: 20px 0 0;
+  }
+  .so-what-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .so-what p {
+    font-size: 13px;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* CONVICTION SIGNAL */
+  .conviction-panel {
+    border-left: 4px solid var(--gold);
+    background: var(--gold-light);
+    padding: 18px 20px;
+    margin: 20px 0;
+  }
+  .conviction-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .conviction-panel h4 {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .conviction-panel p { font-size: 13px; color: var(--ink-2); font-weight: 300; line-height: 1.65; }
+  .conviction-disclaimer {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--ink-3);
+    margin-top: 10px;
+  }
+
+  /* TFSA/RRSP NOTE */
+  .account-note {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    margin-top: 8px;
+    letter-spacing: 0.06em;
+    border-radius: 2px;
+  }
+
+  /* BAR CHARTS */
+  .bar-chart { margin-top: 14px; }
+  .bar-row { margin-bottom: 8px; }
+  .bar-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+  }
+  .bar-track {
+    background: var(--paper-3);
+    height: 8px;
+    width: 100%;
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--violet);
+    border-radius: 1px;
+    transition: width 0.5s ease;
+  }
+  .bar-fill.negative { background: var(--red); }
+
+  /* WEEK AHEAD */
+  .watch-grid {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin: 20px 0 0;
+    border: 1px solid var(--ink);
+  }
+  .watch-cell {
+    background: var(--paper);
+    padding: 24px 20px;
+  }
+  .watch-timing {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .watch-num {
+    font-family: 'Cormorant Sans', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--violet);
+    display: block;
+    line-height: 1.0;
+    margin-bottom: 10px;
+  }
+  .watch-cell h4 {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .watch-cell p { font-size: 13px; color: var(--ink-2); font-weight: 300; line-height: 1.65; }
+
+  /* EVENT TIMELINE */
+  .event-stack { display: flex; flex-direction: column; gap: 1px; background: var(--ink); margin: 20px 0 0; }
+  .event-card { display: grid; grid-template-columns: 200px 1fr; gap: 1px; background: var(--ink); }
+  .event-left {
+    background: var(--navy);
+    padding: 20px 18px;
+    color: #fff;
+  }
+  .event-name {
+    font-family: 'Cormorant Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .event-date-loc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--violet-light);
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+  .event-badge {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+  }
+  .badge-upcoming { background: var(--gold-light); color: var(--gold); }
+  .badge-live { background: var(--green-light); color: var(--green); }
+  .event-right {
+    background: var(--paper-2);
+    padding: 20px 22px;
+  }
+  .event-right.upcoming-bg { background: var(--gold-light); }
+  .event-highlight { margin-bottom: 14px; }
+  .event-highlight:last-child { margin-bottom: 0; }
+  .event-speaker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 3px;
+  }
+  .event-highlight h5 { font-weight: 600; font-size: 13px; color: var(--ink); margin-bottom: 3px; }
+  .event-highlight p { font-size: 12px; color: var(--ink-2); font-weight: 300; line-height: 1.55; }
+
+  /* FOOTER */
+  .footer {
+    border-top: var(--rule);
+    padding: 24px 0;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-left {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+  .footer-right {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+  .footer-disclaimer {
+    border-top: var(--rule-light);
+    padding-top: 16px;
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 800px;
+  }
+
+  /* RESPONSIVE */
+  /* STICKY NAV */
+  .sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--navy);
+    border-bottom: 2px solid var(--violet);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 44px;
+    gap: 16px;
+  }
+  .sticky-nav-wordmark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sticky-nav-wordmark span { color: var(--violet-light); }
+  .sticky-nav-links {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .sticky-nav-links::-webkit-scrollbar { display: none; }
+  .sticky-nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8899cc;
+    text-decoration: none;
+    padding: 0 10px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+  }
+  .sticky-nav-links a:hover { color: #fff; background: rgba(107,95,212,0.2); }
+  .sticky-nav-issue {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--violet-light);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  body { padding-top: 44px; }
+
+  /* AT A GLANCE */
+  .at-a-glance {
+    border-left: 4px solid var(--violet);
+    background: var(--paper-2);
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .at-a-glance-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .at-a-glance-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .at-a-glance-content li {
+    font-size: 13px;
+    color: var(--ink-2);
+    font-weight: 400;
+    line-height: 1.5;
+    padding-left: 18px;
+    position: relative;
+  }
+  .at-a-glance-content li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--violet);
+    font-size: 8px;
+    top: 3px;
+  }
+  .at-a-glance-content li strong { color: var(--ink); font-weight: 600; }
+
+  /* FEATURED SO WHAT */
+  .so-what-featured {
+    border-left: 4px solid var(--violet);
+    background: var(--navy);
+    padding: 24px 28px;
+    margin: 20px 0 0;
+  }
+  .so-what-featured .so-what-label { color: var(--violet-light); }
+  .so-what-featured p {
+    font-size: 15px;
+    color: #c0c8e0;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .so-what-featured p strong { color: #fff; font-weight: 500; }
+
+
+
+  @media (max-width: 780px) {
+    .sticky-nav-links { display: flex; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .sticky-nav-links::-webkit-scrollbar { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .card-grid, .card-grid-3, .watch-grid { grid-template-columns: 1fr; }
+    .event-card { grid-template-columns: 1fr; }
+    .section-num { font-size: 60px; top: 30px; }
+    .footer { flex-direction: column; }
+    .footer-right { text-align: left; }
+    .masthead-title h1 { white-space: normal; }
+  }
+  @media (max-width: 480px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .masthead-title h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="sticky-nav-wordmark">Champlain <span>Analytics</span></div>
+  <div class="sticky-nav-links">
+    <a href="#macro">01 Macro</a>
+    <a href="#sector">02 Sectors</a>
+    <a href="#etf">03 ETFs</a>
+    <a href="#stocks">04 Stocks</a>
+    <a href="#fixed">05 Fixed Income</a>
+    <a href="#currency">06 Currency</a>
+    <a href="#platforms">07 Platforms</a>
+    <a href="#institutional">08 Institutional</a>
+    <a href="#week-ahead">Week Ahead</a>
+  </div>
+  <div class="sticky-nav-issue">Issue #1 · Apr 17, 2026</div>
+</nav>
+
+<!-- MASTHEAD -->
+<div class="section-block">
+  <div class="masthead-meta">◆ Champlain Analytics &nbsp;·&nbsp; Northern Bearing &nbsp;·&nbsp; April 17, 2026 &nbsp;·&nbsp; Issue #1 &nbsp;·&nbsp; Standard Edition</div>
+  <div class="masthead-title">
+    <h1><em>Northern</em> <em class="violet">Bearing</em> <span class="sep">✦</span></h1>
+    <p class="masthead-deck">A U.S.-Iran ceasefire sent markets to record highs this week, but with oil still near $95 and the Strait of Hormuz barely reopened, the relief rally may be outrunning the reality — especially for Canadian energy investors riding <strong>TSX</strong> energy stocks that now face the other side of that trade.</p>
+  </div>
+  <div class="topic-bar">
+    <span>01 Macro Signals</span><span class="topic-sep">◆</span>
+    <span>02 Sector Watch</span><span class="topic-sep">◆</span>
+    <span>03 ETF &amp; Index Intel</span><span class="topic-sep">◆</span>
+    <span>04 Stock Spotlight</span><span class="topic-sep">◆</span>
+    <span>05 Fixed Income &amp; Alternatives</span><span class="topic-sep">◆</span>
+    <span>06 Currency &amp; Global Markets</span><span class="topic-sep">◆</span>
+    <span>07 Platforms &amp; Tools</span><span class="topic-sep">◆</span>
+    <span>08 Institutional Money</span>
+  </div>
+  <p class="disclaimer-bar">For informational purposes only. Not financial advice. All investment decisions are the reader's own.</p>
+</div>
+
+<!-- AT A GLANCE -->
+<div class="section-block">
+  <div class="at-a-glance">
+    <span class="at-a-glance-label">◆ This Issue At a Glance</span>
+    <div class="at-a-glance-content">
+      <ul>
+        <li><strong>US-Iran ceasefire expires April 21</strong> — markets hit all-time highs on relief but oil is still near $95 and the Strait of Hormuz is barely open. The energy trade may be at a turning point.</li>
+        <li><strong>Gold hits US$4,860/oz — up 41.6% year-over-year.</strong> Multiple structural signals aligned. This issue's Conviction Signal. Canadian investors get an extra CAD-weakness tailwind on top.</li>
+        <li><strong>Carney majority + BoC holds at 2.25%</strong> — political stability is a mild positive for Canadian equities. Next rate decision April 29 comes with a full Monetary Policy Report. GIC rates steady at 3.5–3.85%.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- TICKERS ROW -->
+<div class="section-block tickers-section">
+  <div class="tickers-label">Tickers &amp; Instruments Tracked This Issue</div>
+  <div class="pills-row">
+    <span class="pill pill-active">TSX</span>
+    <span class="pill pill-active">S&amp;P 500</span>
+    <span class="pill pill-active">NASDAQ</span>
+    <span class="pill pill-active">XIC</span>
+    <span class="pill pill-active">XIU</span>
+    <span class="pill pill-active">VFV</span>
+    <span class="pill pill-active">VGRO</span>
+    <span class="pill pill-active">SHOP</span>
+    <span class="pill pill-active">RY</span>
+    <span class="pill pill-active">CNQ</span>
+    <span class="pill pill-active">ENB</span>
+    <span class="pill pill-active">GOLD (XAU)</span>
+    <span class="pill pill-secondary">BMO</span>
+    <span class="pill pill-secondary">TD</span>
+    <span class="pill pill-secondary">WTI</span>
+    <span class="pill pill-secondary">BRENT</span>
+    <span class="pill pill-secondary">BRK.B</span>
+    <span class="pill pill-secondary">CAD/USD</span>
+    <span class="pill pill-watch">◆ WATCH · CNQ · ENB</span>
+    <span class="pill pill-notable">◆ NOTABLE MOVE · SHOP · S&amp;P 500</span>
+    <span class="pill pill-conviction">◆ CONVICTION SIGNAL · GOLD</span>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="section-block">
+  <div class="stats-row">
+    <div class="stat-cell">
+      <span class="stat-number">7,041</span>
+      <span class="stat-label">S&amp;P 500 Close · Apr 15</span>
+      <span class="stat-sub">New all-time record. 12th consecutive Nasdaq positive session — longest since 2009.</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-number">34,155</span>
+      <span class="stat-label">TSX Composite · Apr 15</span>
+      <span class="stat-sub">4th consecutive week of gains. Iran ceasefire optimism lifted energy and banking stocks.</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-number">$4,860</span>
+      <span class="stat-label">Gold (USD/oz) · Apr 17</span>
+      <span class="stat-sub">Up 41.6% year-over-year. Approaching $5,000 amid geopolitical uncertainty and central bank buying.</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-number">2.25%</span>
+      <span class="stat-label">Bank of Canada Rate</span>
+      <span class="stat-sub">Held at March 18 meeting. Next decision April 29 — with MPR released same day.</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: MACRO SIGNALS -->
+<div class="section-block" id="macro">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-tag">Section 01 · Weekly Focus</span>
+    <div class="section-title">Macro Signals — What Moved the Economy This Week</div>
+  </div>
+
+  <div class="conviction-panel">
+    <span class="conviction-label">◆ Conviction Signal — Gold as Portfolio Insurance</span>
+    <h4>Gold Has Risen 41.6% in 12 Months. Multiple Signals Now Point the Same Direction.</h4>
+    <p>Gold hit US$4,860/oz this week, driven by central bank buying, geopolitical uncertainty from the US-Iran war, a weakening US dollar, and persistent global inflation. It has surged over 25% since early 2025 alone. The structural case — scarce supply, record institutional demand, and a softening USD — is now backed by multiple independent indicators pointing in the same direction. Canadian investors holding gold ETFs like <strong>ZGD</strong> or <strong>CGL.C</strong> have benefited further from CAD weakness amplifying USD-denominated gold returns.</p>
+    <p class="conviction-disclaimer">This is not a recommendation. Do your own research before acting. Past performance is not indicative of future results.</p>
+    <a href="https://fortune.com/article/current-price-of-gold-04-16-2026/" class="src" target="_blank">→ fortune.com — Gold price April 16, 2026</a>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Notable Move · Iran War / Ceasefire</span>
+      <h4>A Fragile Two-Week Ceasefire Sent Markets to All-Time Highs — But Oil is Still Near $95</h4>
+      <p>The US-Iran ceasefire brokered by Pakistan on April 8 triggered an enormous relief rally: the S&P 500 climbed above 7,000 for the first time ever, and the Dow surged over 1,000 points in a single session. Oil fell 16% in one day from its war-elevated highs. But the ceasefire is shaky — violations have been reported on both sides, Strait of Hormuz traffic remains minimal, and the truce expires April 21. Markets are pricing peace before it exists.</p>
+      <a href="https://www.cnbc.com/2026/04/08/us-iran-war-ceasefire-middle-east-strait-of-hormuz-oil-markets.html" class="src" target="_blank">→ cnbc.com — US-Iran ceasefire market reaction</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Bank of Canada · Rate Hold</span>
+      <h4>BoC Holds at 2.25% — Next Decision April 29 With Full MPR Update</h4>
+      <p>The Bank of Canada maintained its overnight rate at 2.25% at its March 18 meeting. Canadian inflation was 1.8% in February — within the 1–3% target band — and the Bank has signalled it expects to hold through 2026. The next rate decision on April 29 comes with a full Monetary Policy Report, which will be the first major macro read since the Iran ceasefire and the Carney majority. Bay Street expects no move, but the MPR language will matter.</p>
+      <span class="account-note">TFSA ✓ — Stable rates make GICs a competitive safe option. See Section 05.</span>
+      <a href="https://www.bankofcanada.ca/2026/03/fad-press-release-2026-03-18/" class="src" target="_blank">→ bankofcanada.ca — March 2026 rate decision</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Canadian Politics · Market Signal</span>
+      <h4>Carney Secures Liberal Majority — Investors React Positively</h4>
+      <p>Prime Minister Mark Carney's Liberals secured a parliamentary majority this week after winning key by-elections, pushing their seat count to 174. The TSX rallied on the news, with SHOP, RY, and LULU among the movers cited. Analysts noted a majority gives Carney stability to pursue trade diversification and infrastructure spending — both viewed as positive for Canadian equities. USD/CAD softened slightly as the loonie firmed on broader USD weakness.</p>
+      <a href="https://www.aljazeera.com/news/2026/4/14/carney-vows-focus-on-affordability-after-winning-canadas-special-election" class="src" target="_blank">→ aljazeera.com — Carney majority government</a>
+    </div>
+    <div class="card">
+      <span class="card-label">US Jobs Data · Labour Market</span>
+      <h4>US Jobless Claims Fall to 207,000 — Labour Market Stays Resilient</h4>
+      <p>Initial US unemployment filings fell to 207,000 for the week ending April 11, beating expectations of 215,000. This keeps the Fed in its current holding pattern — no near-term cuts signal — and suggests the US economy is absorbing the geopolitical shock better than feared. For Canadian investors holding US equities or S&P 500 ETFs like VFV, a resilient US labour market supports continued earnings growth.</p>
+      <a href="https://www.cnbc.com/2026/04/15/stock-market-today-live-updates.html" class="src" target="_blank">→ cnbc.com — US jobless claims April 11</a>
+    </div>
+  </div>
+
+  <div class="so-what-featured">
+    <span class="so-what-label">SO WHAT — FOR THE SELF-DIRECTED INVESTOR · THIS WEEK'S KEY TAKEAWAY</span>
+    <p>The market is trading on hope that the Iran situation resolves cleanly — but the ceasefire expires <strong>April 21</strong> and oil is still elevated near $95. If you've been riding the energy rally in CNQ or ENB, it's worth asking whether you want to trim into strength or hold through what could be a volatile week. The <strong>Carney majority</strong> is a genuine positive for Canadian policy stability. The BoC hold isn't moving your GIC or bond math much — rates are staying put, which means the current 3.5–3.85% GIC window remains worth acting on if you have cash sitting idle in a savings account.</p>
+  </div>
+</div>
+
+<!-- SECTION 02: SECTOR WATCH -->
+<div class="section-block" id="sector">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-tag">Section 02 · TSX &amp; S&amp;P 500</span>
+    <div class="section-title">Sector Watch — What's Rotating In and Out</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Watch · TSX Energy Sector</span>
+      <h4>Energy Led Q1 on the S&P 500 (+37.9%) — But the Iran Ceasefire Introduces a New Headwind</h4>
+      <p>Energy was the runaway sector winner in Q1 2026 on both sides of the border, driven by the Iran war and Strait of Hormuz disruptions pushing WTI above $100 briefly. The ceasefire is now a double-edged sword for Canadian energy investors: CNQ was up 0.92% Thursday even as a deal loomed, but a full peace resolution could send oil back toward $70. Monitor carefully — energy's gain may have already been your entry point, not your exit.</p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label"><span>Energy (Q1)</span><span>+37.9%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Materials (Q1)</span><span>+10.7%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>Utilities (Q1)</span><span>+8.3%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:30%"></div></div>
+        </div>
+      </div>
+      <a href="https://www.communityamerica.com/blog/2026/april-2026-market-insights" class="src" target="_blank">→ communityamerica.com — Q1 2026 sector performance</a>
+    </div>
+    <div class="card">
+      <span class="card-label">TSX Financials · 30.7% of Index Weight</span>
+      <h4>Canadian Banks Steady — TD and BMO Dipped as Oil Rally Eased Stagflation Fears</h4>
+      <p>Financial stocks make up 30.7% of the TSX — the index's largest sector. TD and BMO traded modestly lower (-0.2% and -0.4%) this week as the energy rally cooled, but the Big Six overall remain fundamentally solid. Lower bond yields, flagged in the week's data, provide some support to bank stock valuations. RY remains a top-3 TSX holding by index weight.</p>
+      <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-tsx-composite-index/" class="src" target="_blank">→ spglobal.com — TSX sector composition</a>
+    </div>
+    <div class="card watch-hl">
+      <span class="card-label">◆ Watch · Technology — TSX &amp; Nasdaq</span>
+      <h4>Nasdaq's 12-Session Win Streak — Longest Since 2009 — Is a Signal Worth Watching</h4>
+      <p>The Nasdaq posted its 12th consecutive positive session this week, its longest win streak since 2009, closing at 24,102. Shopify (SHOP) — the TSX's technology bellwether and third-largest index constituent — has been volatile but analysts remain broadly bullish. The Goldman Sachs CEO called recent software stock selling overdone, suggesting tech may have more room to run. SHOP's next earnings date will be a major catalyst.</p>
+      <a href="https://www.cnbc.com/2026/04/15/stock-market-today-live-updates.html" class="src" target="_blank">→ cnbc.com — Nasdaq win streak April 15</a>
+    </div>
+    <div class="card">
+      <span class="card-label">S&amp;P 500 Q1 Losers · Rotation Watch</span>
+      <h4>Financials and Consumer Discretionary Were the S&P's Worst Sectors in Q1</h4>
+      <p>While energy surged, Financials (-9.4%), Consumer Discretionary (-8.6%), and Technology (-7.6%) were Q1's worst S&P 500 sectors. Investors who trimmed those heading into the year may now be looking at re-entry. The S&P 500 has recovered fully from its Iran war losses and is now at all-time highs — meaning any position you add from here is made at record prices. That isn't a reason not to invest, but it's a reason to be deliberate.</p>
+      <a href="https://www.communityamerica.com/blog/2026/april-2026-market-insights" class="src" target="_blank">→ communityamerica.com — Q1 sector breakdown</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>The TSX is heavily weighted toward Financials and Energy (combined ~47% of the index). If you hold XIC or XIU, you are already significantly exposed to both. That concentration has paid off in 2026 so far, but it also means a sustained oil price drop or a bad Canadian bank earnings season hits your Canadian ETF harder than you might expect. Diversifying internationally — even a small allocation to VFV or XEF — has historically smoothed out those bumps.</p>
+  </div>
+</div>
+
+<!-- SECTION 03: ETF & INDEX INTEL -->
+<div class="section-block" id="etf">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-tag">Section 03 · Funds &amp; Indexes</span>
+    <div class="section-title">ETF &amp; Index Intel — What the Funds Are Doing</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Notable Move · XEF — International Outperformer</span>
+      <h4>XEF Was the Top Canadian ETF Last Month — Up 4.19% While XIU Lost 0.21%</h4>
+      <p>The iShares Core MSCI EAFE IMI Index ETF (XEF), which tracks international developed markets outside North America, was the top performer among Canada's 10 largest ETFs in the most recent month, gaining 4.19%. Meanwhile, XIU — Canada's flagship TSX 60 ETF — lost 0.21% in the same period. This is a notable divergence and a reminder that international diversification has been earning its keep in 2026. For Canadian investors who are TSX-heavy, XEF deserves a look.</p>
+      <span class="account-note">TFSA ✓ — XEF is eligible for TFSA and RRSP. Note: international ETFs held in RRSP may benefit from reduced withholding taxes on dividends depending on the country.</span>
+      <a href="https://global.morningstar.com/en-ca/etfs/how-largest-etfs-canada-performed" class="src" target="_blank">→ morningstar.com — Largest Canadian ETF performance</a>
+    </div>
+    <div class="card">
+      <span class="card-label">XIC · Core Canadian Holding</span>
+      <h4>XIC Sits at $27.98B AUM — Still the Core Canadian Equity Holding for Most DIY Investors</h4>
+      <p>XIC, the iShares Core S&P/TSX Capped Composite ETF, has grown to $27.98B in assets under management, making it one of the largest Canadian ETFs by size. Its MER is just 0.06%, and it provides exposure to the full breadth of the TSX including small and mid-cap names that XIU (which only tracks the TSX 60) misses. Its 52-week high is $54.96 and 52-week low is $37.13 — a wide range that reflects the Iran war volatility of 2026.</p>
+      <span class="account-note">TFSA ✓ RRSP ✓ — XIC is a strong core holding in both registered accounts. No withholding tax concerns for this Canadian-listed, Canadian-equity ETF.</span>
+      <a href="https://wealthawesome.com/etfs/xic" class="src" target="_blank">→ wealthawesome.com — XIC profile</a>
+    </div>
+    <div class="card">
+      <span class="card-label">VFV vs XIC · The Core Debate</span>
+      <h4>VFV Tracks the S&P 500 in CAD — The Currency Angle Matters More Than You Think</h4>
+      <p>VFV gives Canadians unhedged exposure to the S&P 500 in Canadian dollars. When the CAD weakens (as it has in 2026 — down from 0.74 to 0.728 vs USD), your VFV returns get a boost from currency alone — you're buying US equities "cheaper" in Canadian terms. However, if the CAD recovers strongly (e.g. on a peace deal or rate parity), that tailwind reverses. Hedged alternatives like XSP eliminate this variable, at the cost of some complexity.</p>
+      <span class="account-note">RRSP ✓ — VFV held in an RRSP is exempt from the 15% US dividend withholding tax that applies to US ETFs in TFSAs. Consider this if you hold US-listed ETFs.</span>
+      <a href="https://piggybank.ca/investing/etf/xic-vs-vfv" class="src" target="_blank">→ piggybank.ca — XIC vs VFV comparison</a>
+    </div>
+    <div class="card watch-hl">
+      <span class="card-label">◆ Watch · 2026 Total Cost Reporting</span>
+      <h4>New Canadian Reporting Rules in 2026 Will Show You What You're Actually Paying in Fees</h4>
+      <p>Starting in 2026, new Total Cost Reporting (TCR) regulations require Canadian brokerages to show your total Fund Expense Ratio (MER + TER) in dollar terms on your annual statements. You'll start seeing the first reports covering 2026 when statements arrive in early 2027. This is a meaningful change — for the first time, investors will see exactly how much in dollar fees they paid, not just a percentage. If you've never audited your MER, now is a good time to start.</p>
+      <a href="https://wealthradiant.com/wealthsimple-vs-questrade/" class="src" target="_blank">→ wealthradiant.com — 2026 TCR rules explained</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>If your Canadian portfolio is mostly XIU and XIC, you've done fine — but this week's data is a nudge to check if you have any international exposure at all. XEF outperformed XIU significantly last month. A simple three-fund setup (XIC + VFV + XEF or a global bond ETF) covers most of what a long-term Canadian retail investor needs, at extremely low cost. The new 2026 fee reporting rules will also, for the first time, show the full cost picture in plain dollars — worth reviewing when those statements arrive.</p>
+  </div>
+</div>
+
+<!-- SECTION 04: STOCK SPOTLIGHT -->
+<div class="section-block" id="stocks">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-tag">Section 04 · Individual Names</span>
+    <div class="section-title">Stock Spotlight — Notable Movers This Week</div>
+  </div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card highlight">
+      <span class="card-label">◆ Notable Move · SHOP — Shopify</span>
+      <h4>Shopify Rallied With the TSX on Carney Majority and Analyst Bullishness — Earnings Are Coming</h4>
+      <p>Shopify (SHOP / SHOP.TO) was among the top TSX movers this week following the Carney majority news. Analysts at TipRanks flagged bullishness on SHOP this week, continuing a trend of positive coverage. For context: Shopify's last earnings report showed Q2 2025 revenue of US$2.7B, up 31% YoY, and its market cap briefly surpassed RBC to become Canada's most valuable public company. Shopify's next earnings call will be a major event — dates TBD but typically early May.</p>
+      <a href="https://www.cnbc.com/quotes/SHOP" class="src" target="_blank">→ cnbc.com — Shopify news and quote</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Watch · CNQ — Canadian Natural Resources</span>
+      <h4>CNQ Rose 0.92% Thursday Even as Peace Deal Loomed — Energy Stocks Face a Directional Decision</h4>
+      <p>Canadian Natural Resources (CNQ.TO), one of the TSX's largest energy constituents, gained 0.92% on Thursday even as the Iran ceasefire took hold — suggesting markets haven't fully priced in a peace outcome for oil prices. CNQ is a fundamentally strong business, but its near-term direction is highly correlated with WTI. With the ceasefire expiring April 21, this name is a watch, not a chase.</p>
+      <a href="https://tradingeconomics.com/canada/stock-market" class="src" target="_blank">→ tradingeconomics.com — TSX energy stocks</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Live Nation · LYV · US-Listed</span>
+      <h4>Live Nation Found Guilty of Illegal Ticketing Monopoly — Stock Dropped 3%+ on the News</h4>
+      <p>A New York federal jury ruled that Live Nation Entertainment (which owns Ticketmaster) holds an illegal monopoly over the concert ticketing market. Shares dropped more than 3% on the verdict. 34 states were parties to the suit. This is a notable antitrust moment in a tech-adjacent sector — worth watching if you hold LYV or any entertainment/platform stocks, as regulatory risk is now material and sentencing could result in a breakup of the business.</p>
+      <a href="https://www.cnbc.com/2026/04/14/stock-market-today-live-updates.html" class="src" target="_blank">→ cnbc.com — Live Nation monopoly ruling</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>Shopify remains Canada's most important tech stock for retail investors to understand, even if you don't own it directly — it's a major XIC weight and signals a lot about global e-commerce sentiment. CNQ is a case where geopolitics, not fundamentals, are running the price right now. If you hold it for dividends and long-term energy exposure, that thesis hasn't changed. If you bought it as a Iran-war trade, be clear with yourself about what your exit looks like if the peace deal holds.</p>
+  </div>
+</div>
+
+<!-- SECTION 05: FIXED INCOME & ALTERNATIVES -->
+<div class="section-block" id="fixed">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-tag">Section 05 · Bonds, GICs &amp; Gold</span>
+    <div class="section-title">Fixed Income, REITs &amp; Alternatives — The Defensive Side of Your Portfolio</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Conviction Signal · Gold (See Section 01)</span>
+      <h4>Gold at US$4,860 — Up 41.6% Year-Over-Year — The Structural Case Has Never Been Stronger</h4>
+      <p>Gold continued its historic run this week, reaching US$4,860/oz on April 17 after briefly hitting $4,878 earlier in the week. The year-over-year gain of 41.6% is extraordinary. For Canadian investors, the story is even better: the CAD has weakened against the USD this year, which means gold's USD gains translate to even larger CAD returns. Analysts point to central bank buying, the weak US dollar (DXY near 4-week lows), and geopolitical uncertainty as the structural drivers. Forecasts suggest $4,900–$5,400 is possible by year-end.</p>
+      <span class="account-note">TFSA ✓ RRSP ✓ — Gold ETFs like CGL.C or ZGD are eligible for all registered accounts and provide exposure without physical storage. Consider as 5–10% of a balanced portfolio.</span>
+      <a href="https://tradingeconomics.com/commodity/gold" class="src" target="_blank">→ tradingeconomics.com — Gold price April 17, 2026</a>
+    </div>
+    <div class="card">
+      <span class="card-label">GIC Rates · Canada · April 2026</span>
+      <h4>Best GIC Rates Now Range From 2.25%–3.85% — Still Worth Locking In Before They Drift Lower</h4>
+      <p>With the BoC holding at 2.25%, GIC rates have stabilized but are not expected to rise further. The best 1-year GIC in Canada is currently 3.60% (Achieva Financial), while 5-year rates top out at 3.85%. The era of 5% GICs is over. Experts suggest that if you want guaranteed, risk-free returns in a TFSA or RRSP, locking in a 3.5%+ rate now makes more sense than waiting for rates that are unlikely to climb. GICs are CDIC-insured up to $100,000.</p>
+      <span class="account-note">TFSA ✓ RRSP ✓ — GIC interest is fully taxable in a non-registered account but grows tax-free or tax-deferred in TFSA/RRSP. Prioritize registered accounts for GIC holdings.</span>
+      <a href="https://www.ratehub.ca/gics/best-gic-rates" class="src" target="_blank">→ ratehub.ca — Best GIC rates April 2026</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Gold in CAD · +53% Year-Over-Year</span>
+      <h4>In Canadian Dollar Terms, Gold Has Gained 53% Over the Past Year — A Significant Outperformer</h4>
+      <p>While gold's USD performance has been exceptional, the CAD-denominated return has been even larger due to loonie weakness. In October 2024, gold was trading at roughly CAD $3,701/oz. By October 2025 it was at CAD $5,671/oz — a 53% gain. CAD-priced gold continues to benefit from the dual tailwind of rising USD gold prices and a weakening Canadian dollar. This is particularly relevant for investors using Canadian gold ETFs which price in CAD.</p>
+      <a href="https://fortune.com/article/current-price-of-gold-04-16-2026/" class="src" target="_blank">→ fortune.com — Gold price analysis April 2026</a>
+    </div>
+    <div class="card watch-hl">
+      <span class="card-label">◆ Watch · REITs</span>
+      <h4>Canadian REITs Gained 1.87% in Q1 — A Modest Recovery Worth Monitoring as Rate Outlook Settles</h4>
+      <p>Real estate finished Q1 2026 as one of the TSX's modest positive sectors (+1.87%), recovering some ground from the rate-driven losses of recent years. Canadian REITs are sensitive to interest rate expectations — with the BoC holding steady and cuts not expected imminently, the REIT recovery remains gradual. If you're a dividend-focused investor looking for income, Canadian REITs offer yields in the 4–7% range, but interest rate risk remains a consideration.</p>
+      <span class="account-note">NON-REG NOTE — REIT distributions are often treated as other income (not eligible dividends), making them less tax-efficient in non-registered accounts. Consider holding REITs inside a TFSA or RRSP where possible.</span>
+      <a href="https://www.communityamerica.com/blog/2026/april-2026-market-insights" class="src" target="_blank">→ communityamerica.com — Q1 sector data</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>If you're sitting on cash in a TFSA or RRSP that isn't working, the current GIC window of 3.5–3.85% is genuinely attractive for a guaranteed return — especially if you're risk-averse or close to a near-term goal like a home purchase or planned withdrawal. Gold continues to be one of the year's most compelling stories, though at $4,860/oz the easy gains may already be in. A 5–10% allocation to a gold ETF as portfolio insurance is a reasonable consideration for a balanced, long-term portfolio.</p>
+  </div>
+</div>
+
+<!-- SECTION 06: CURRENCY & GLOBAL MARKETS -->
+<div class="section-block" id="currency">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-tag">Section 06 · CAD/USD &amp; International</span>
+    <div class="section-title">Currency &amp; Global Markets — What It Means for Your US-Listed Holdings</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">CAD/USD · April 17, 2026</span>
+      <h4>The Loonie Is at 0.728 USD — Recovering Slightly But Still Weak. What That Means for You.</h4>
+      <p>The Canadian dollar traded at approximately 0.728 USD on April 17 — up slightly from the April 3 low of 0.717 (the weakest point of 2026), but still meaningfully below the January high of 0.741. The recovery this week was driven by USD weakness: the US Dollar Index (DXY) fell toward a 4-week low, as Iran ceasefire optimism reduced safe-haven demand for the USD. For Canadians holding US-listed stocks or ETFs like VFV, QQQ, or SPY, a weak CAD is a tailwind on the way up — but means more conversion cost when you sell or reinvest dividends.</p>
+      <a href="https://tradingeconomics.com/canada/currency" class="src" target="_blank">→ tradingeconomics.com — CAD/USD April 2026</a>
+    </div>
+    <div class="card">
+      <span class="card-label">US Dollar · DXY at 4-Week Low</span>
+      <h4>A Weak US Dollar Has Been the Quiet Driver of This Week's Global Rally — Including Canadian Markets</h4>
+      <p>The US Dollar Index (DXY) fell to approximately 98 this week, near a 4-week low, as Iran ceasefire news reduced geopolitical risk premium in the USD. A weaker USD is generally good for commodity prices (oil, gold), for emerging markets, and for Canadians holding USD assets (since those assets are worth more in CAD on conversion). It also means Canadian manufacturing exports become slightly more competitive in USD terms.</p>
+      <a href="https://tradingeconomics.com/canada/currency" class="src" target="_blank">→ tradingeconomics.com — Currency commentary April 2026</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Global Markets · Europe &amp; Asia</span>
+      <h4>European and Asian Markets Also Surged on Iran Ceasefire — A Synchronized Global Relief Rally</h4>
+      <p>The Iran ceasefire didn't just move North American markets — Asian and European benchmarks surged in parallel, with the relief rally described as "synchronized" across regions. The Strait of Hormuz blockade had been particularly disruptive for Asian economies dependent on Gulf oil imports. A partial reopening of the strait benefits global shipping and manufacturing supply chains, which has positive downstream effects on Canadian resource exporters whose products feed Asian industrial demand.</p>
+      <a href="https://www.npr.org/2026/04/08/nx-s1-5776818/wall-street-stocks-oil-trump-iran-ceasefire" class="src" target="_blank">→ npr.org — Global market reaction to ceasefire</a>
+    </div>
+    <div class="card watch-hl">
+      <span class="card-label">◆ Watch · Norbert's Gambit on Wealthsimple</span>
+      <h4>Wealthsimple Plans to Launch Norbert's Gambit in 2026 — A Major Feature for US Stock Investors</h4>
+      <p>Norbert's Gambit is a technique that lets investors convert CAD to USD (and vice versa) at near-wholesale rates — avoiding the typical 1.5% currency conversion fee. Questrade already offers it. Wealthsimple has announced it's coming to their platform in 2026. For Canadian investors who regularly buy US-listed stocks or ETFs, this could save hundreds of dollars annually. If you're on Wealthsimple and regularly purchasing VFV, QQQ, or US stocks, watch for this feature rollout.</p>
+      <a href="https://milesopedia.com/en/personal-finance/investing/questrade-vs-wealthsimple/" class="src" target="_blank">→ milesopedia.com — Norbert's Gambit coming to Wealthsimple</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>The current CAD at ~0.728 is meaningful context for any decision to buy US-listed assets. You're getting US stocks at a ~27% premium in Canadian terms relative to par — that's significant. It's not a reason to avoid US equities (they've dramatically outperformed over any long period), but it's a reason to be aware. If the CAD strengthens significantly over the next year — say, back to 0.75+ on a peace deal or BoC/Fed rate convergence — any USD holdings you sell will return fewer Canadian dollars than you might expect.</p>
+  </div>
+</div>
+
+<!-- SECTION 07: PLATFORMS & TOOLS -->
+<div class="section-block" id="platforms">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-tag">Section 07 · Canadian Brokerages</span>
+    <div class="section-title">Platforms &amp; Tools — What's Changing at Canadian Brokerages</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Notable Move · Questrade Pro</span>
+      <h4>Questrade Launches Pro Platform — Advanced Charts, AI Analysis, and Physical Gold From $5</h4>
+      <p>Questrade launched Questrade Pro, a new browser-based advanced trading platform with 1-second candles, professional-grade charting, and built-in AI analysis tools. Alongside this, Questrade announced "Quest Metals" — fractional physical gold purchases starting from $5, stored at the Royal Canadian Mint. Private equity, private credit, and pre-IPO access are also coming through 2026. This represents a major step up from a simple commission-free brokerage toward a full-featured platform. The Pro rollout began via a waiting list and is expanding in 2026.</p>
+      <a href="https://www.financemagnates.com/forex/questrade-rolls-out-pro-platform-exzpands-product-suite-as-canada-brokerage-race-heats-up/" class="src" target="_blank">→ financemagnates.com — Questrade Pro launch</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Wealthsimple · AI Research Dashboard</span>
+      <h4>Wealthsimple's Upcoming AI Research Dashboard Will Offer Natural-Language Stock Screening</h4>
+      <p>Wealthsimple is building an AI research dashboard that will let investors screen stocks using natural language queries, get market-driver summaries, and detect patterns in their holdings. This is on top of existing improvements to their Active Trader experience. Wealthsimple manages $100B AUD (vs Questrade's $85B), and these AI tools are aimed squarely at the engaged self-directed investor who wants more than a buy/sell button.</p>
+      <a href="https://www.fathom4sight.ai/blog-articles/wealthsimple-vs-questrade-inside-the-new-era-of-canadian-diy-investing" class="src" target="_blank">→ fathom4sight.ai — Wealthsimple vs Questrade 2026</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Qtrade · Commission-Free</span>
+      <h4>Qtrade Went Commission-Free — The Entire Canadian Brokerage Landscape Is Now Fee-Competitive</h4>
+      <p>Following Questrade's move to commission-free trading in early 2025, Qtrade Direct Investing also eliminated trading commissions. As of 2026, every major Canadian self-directed brokerage — Wealthsimple, Questrade, and Qtrade — offers $0 commission trades on stocks and ETFs. This shifts the comparison from "who's cheapest" to "who gives the best platform experience, research tools, and USD workflow." Questrade wins on USD; Wealthsimple wins on simplicity and banking integration.</p>
+      <a href="https://www.stockbrokers.com/ca/guides/questrade-vs-wealthsimple" class="src" target="_blank">→ stockbrokers.com — Canadian brokerage comparison 2026</a>
+    </div>
+    <div class="card watch-hl">
+      <span class="card-label">◆ Watch · 2026 Fee Transparency Rules</span>
+      <h4>New "Total Cost Reporting" Rules Mean Your 2026 Brokerage Statements Will Show Fees in Dollars</h4>
+      <p>Under new 2026 TCR regulations, your annual investment statements will now include the Fund Expense Ratio (MER + TER) expressed in actual dollar terms, not just as a percentage. If you hold mutual funds or actively managed ETFs, you'll see for the first time exactly how much you paid in fees last year. For self-directed investors holding low-cost index ETFs, this change will confirm what they already know. For anyone still holding higher-fee products, it may be a wake-up call worth acting on.</p>
+      <a href="https://wealthradiant.com/wealthsimple-vs-questrade/" class="src" target="_blank">→ wealthradiant.com — TCR rules 2026</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>The Canadian brokerage race is now genuinely competitive, which is good for you. If you're on Wealthsimple and mostly buying Canadian ETFs in CAD, you're well served. If you regularly buy US stocks or ETFs, Questrade's existing Norbert's Gambit support likely saves you more money than any other single decision you can make. Questrade's Pro platform and physical gold access are new features worth exploring if you want more than the basics. The new fee transparency rules arriving in 2026 statements are worth reviewing with fresh eyes — especially if you have older, higher-cost products you haven't revisited in years.</p>
+  </div>
+</div>
+
+<!-- SECTION 08: INSTITUTIONAL MONEY -->
+<div class="section-block" id="institutional">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-tag">Section 08 · Smart Money Moves</span>
+    <div class="section-title">What Institutional Money Is Doing — Berkshire, Pensions &amp; Major Funds</div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">Berkshire Hathaway · Greg Abel Year One</span>
+      <h4>Berkshire Under New CEO Greg Abel Has $373B in Cash — Watching for the First Major Deployment</h4>
+      <p>Warren Buffett retired as Berkshire Hathaway CEO on January 1, 2026 — remaining as chairman — with Greg Abel now running the company day-to-day. Berkshire holds a record $373B cash pile and a ~$274B equity portfolio. Abel has resumed share buybacks and made Berkshire's first major overseas equity investment of the year (Tokio Marine, a Japanese insurer). The Q1 2026 13F filing, due mid-May, will be closely watched for Abel's first independent capital deployment signals. Berkshire's top holdings remain Apple, American Express, Bank of America, Coca-Cola, and Chevron.</p>
+      <a href="https://www.ibtimes.com.au/10-stocks-warren-buffett-has-been-buying-2026-revealed-berkshires-latest-portfolio-cash-moves-1865862" class="src" target="_blank">→ ibtimes.com.au — Berkshire 2026 portfolio moves</a>
+    </div>
+    <div class="card">
+      <span class="card-label">Berkshire Positioning · Insurance &amp; Energy</span>
+      <h4>Abel Is Leaning Into Insurance and Energy — Trimming Media and Certain Tech</h4>
+      <p>Based on the most recent 13F filing (covering Q4 2025), Berkshire increased exposure to Chubb (insurance) and Domino's Pizza, while exiting Liberty Media tracking stocks (converted to Sirius XM shares) and selectively trimming certain financial and technology names. The overall posture: disciplined, conservative, large-moat businesses with pricing power and strong balance sheets. Abel's first original move was a Japanese insurance stake — suggesting international diversification is now on the table.</p>
+      <a href="https://acquirersmultiple.com/2026/03/warren-buffetts-portfolio-update-top-holdings-key-trims-and-media-restructuring/" class="src" target="_blank">→ acquirersmultiple.com — Berkshire portfolio update</a>
+    </div>
+    <div class="card">
+      <span class="card-label">CPP &amp; Canadian Pensions</span>
+      <h4>Canada's Pension Giants Are Globally Diversified — Their Moves Signal Long-Term Structural Themes</h4>
+      <p>CPP Investments, OMERS, and the Ontario Teachers' Pension Plan are among the world's largest institutional investors. While specific April 2026 transactions weren't disclosed this week, the broad trend from their 2026 positioning has been: continued rotation into infrastructure, private credit, and global real assets. These pension funds are also significant holders of Canadian financial stocks and global infrastructure — sectors that benefit from the current stable-rate environment.</p>
+      <a href="https://www.rbc.com/en/economics/financial-markets-monthly/steady-as-she-goes-central-banks-hold-the-line-in-2026/" class="src" target="_blank">→ rbc.com — Canadian economic outlook 2026</a>
+    </div>
+    <div class="card watch-hl">
+      <span class="card-label">◆ Watch · Berkshire Q1 13F — Due Mid-May</span>
+      <h4>Greg Abel's First Full Quarter of Decisions Will Be Revealed in the Mid-May 13F Filing</h4>
+      <p>The Q1 2026 13F filing — covering January through March 2026 — will be the first to fully reflect Greg Abel's independent investment decisions as Berkshire's new CEO. Analysts and retail investors worldwide will parse it for signals about whether Abel continues Buffett's playbook or begins establishing his own. Sectors to watch: whether energy exposure was added (consistent with Abel's background in energy), whether cash deployment accelerated, and any new positions initiated.</p>
+      <a href="https://www.ibtimes.com.au/10-stocks-warren-buffett-has-been-buying-2026-revealed-berkshires-latest-portfolio-cash-moves-1865862" class="src" target="_blank">→ ibtimes.com.au — Berkshire 2026 capital allocation</a>
+    </div>
+  </div>
+
+  <div class="so-what">
+    <span class="so-what-label">So What — For the Self-Directed Investor</span>
+    <p>You can't replicate Berkshire or CPP's access to private deals and insider relationships, and you shouldn't try. But there's something useful in what they signal directionally: a preference for durable, cash-generating businesses with pricing power over speculative growth, and a clear move toward international diversification and infrastructure. Those aren't bad signals for a retail investor building a long-term, balanced portfolio. Berkshire's 13F in May is worth reading not to copy their trades, but to understand the reasoning behind the positioning of one of history's most disciplined capital allocators — now under new management.</p>
+  </div>
+</div>
+
+<!-- WEEK AHEAD -->
+<div class="section-block" id="week-ahead">
+  <div class="section-header" style="border-top: var(--rule); display: flex; align-items: center; gap: 20px;">
+    <div>
+      <span class="section-tag">Week Ahead</span>
+      <div class="section-title">What to Watch — April 21–25, 2026</div>
+    </div>
+    <div style="flex: 1; height: 1.5px; background: var(--paper-3); margin-top: 12px;"></div>
+  </div>
+
+  <div class="watch-grid">
+    <div class="watch-cell">
+      <span class="watch-timing">Mon · Apr 21</span>
+      <span class="watch-num">1</span>
+      <h4>US-Iran Ceasefire Expires — The Most Important Non-Market Event of the Week</h4>
+      <p>The two-week US-Iran ceasefire expires on Tuesday April 21. Brent crude was already back near $99 before the week began, signalling that markets haven't priced a clean peace outcome. If the ceasefire collapses, expect oil prices to spike, energy stocks to rally, and broad market volatility to return. If a deal extends or formalizes, energy stocks may give back gains and the relief rally could continue. Monitor WTI crude prices Monday and Tuesday as the leading indicator.</p>
+      <a href="https://www.cnbc.com/2026/04/16/iran-war-oil-price-strait-hormuz.html" class="src" target="_blank">→ cnbc.com — Ceasefire expiry and oil outlook</a>
+    </div>
+    <div class="watch-cell">
+      <span class="watch-timing">Tue · Apr 29</span>
+      <span class="watch-num">2</span>
+      <h4>Bank of Canada Rate Decision + Monetary Policy Report — April 29</h4>
+      <p>The Bank of Canada's next rate decision on April 29 comes with a full Monetary Policy Report — the first major economic forecast update since the Iran ceasefire and the Carney majority. Rates are almost universally expected to hold at 2.25%, but the language in the MPR will signal how the BoC is reading the trade environment, inflation trajectory, and any impact from geopolitical stabilization. This will shape GIC rates, mortgage outlooks, and CAD direction for the next 6–8 weeks.</p>
+      <a href="https://www.bankofcanada.ca/press/upcoming-events/" class="src" target="_blank">→ bankofcanada.ca — April 29 rate decision</a>
+    </div>
+    <div class="watch-cell">
+      <span class="watch-timing">Week of Apr 21</span>
+      <span class="watch-num">3</span>
+      <h4>Earnings Season Continues — Waste Connections and Fairfax Financial on TSX Radar</h4>
+      <p>The coming week brings earnings from Waste Connections and Fairfax Financial on the TSX side — two names being closely watched to gauge how Canadian companies are managing the headwinds from elevated oil prices and global uncertainty. On the US side, earnings season continues with major tech and consumer names reporting. Any miss from a large tech company could dent the Nasdaq's 12-session win streak and pull SHOP and other Canadian tech-adjacent names lower in sympathy.</p>
+      <a href="https://tradingeconomics.com/canada/stock-market" class="src" target="_blank">→ tradingeconomics.com — TSX earnings calendar</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="section-block footer">
+  <div>
+    <div class="footer-left">
+      NORTHERN BEARING · ISSUE #1<br>
+      8 Research Areas · 10+ Sources Consulted<br>
+      TSX · S&amp;P 500 · BoC · Gold · GICs · CAD/USD<br>
+      Berkshire · Wealthsimple · Questrade
+    </div>
+    <div class="footer-disclaimer">
+      Northern Bearing is published weekly by Champlain Analytics for informational purposes only. Nothing in this publication constitutes financial advice, investment advice, or a recommendation to buy or sell any security. All investment decisions are the sole responsibility of the reader. Champlain Analytics is not a registered investment advisor. Past performance is not indicative of future results. All data sourced from publicly available information as of April 17, 2026.
+    </div>
+  </div>
+  <div class="footer-right">
+    Champlain Analytics<br>
+    Northern Bearing · Issue #1<br>
+    April 17, 2026<br>
+    For informational purposes only.
+  </div>
+</div>
+
+</body>
+</html>
