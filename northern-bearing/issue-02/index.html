@@ -41,16 +41,46 @@
   .sticky-nav-issue { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.08em; color: var(--violet-light); text-transform: uppercase; white-space: nowrap; padding: 0 20px; flex-shrink: 0; }
 
   .masthead-meta { background: var(--navy); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; padding: 12px 20px; margin: 0 -20px; }
-  .masthead-title { padding: 40px 0 24px; border-bottom: var(--rule); }
+  .masthead-title {
+  padding: 40px 0 20px;
+  border-bottom: var(--rule);
+}
   .masthead-title h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(48px, 7vw, 80px); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; white-space: nowrap; }
   .masthead-title h1 em { font-style: italic; color: var(--ink); }
   .masthead-title h1 em.violet { color: var(--violet); }
   .masthead-title h1 .sep { color: var(--paper-3); font-size: 0.7em; vertical-align: middle; margin: 0 12px; font-style: normal; }
-  .masthead-deck { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 300; color: var(--ink-2); max-width: 680px; margin: 20px 0 0; line-height: 1.7; }
+  .masthead-deck {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink-2);
+  max-width: 680px;
+  margin: 18px 0 0;
+  line-height: 1.7;
+}
   .masthead-deck strong { font-weight: 600; color: var(--ink); }
-  .topic-bar { background: var(--ink); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; padding: 10px 20px; margin: 24px -20px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+  .topic-bar {
+  background: var(--ink);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 12px 20px;
+  margin: 20px -20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
   .topic-bar span.sep { color: var(--violet); margin: 0 4px; }
-  .masthead-disclaimer { font-family: 'DM Sans', sans-serif; font-size: 11px; font-style: italic; color: var(--ink-3); margin: 14px 0 0; line-height: 1.6; }
+  .disclaimer-bar {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--ink-3);
+  padding: 10px 0;
+  border-bottom: var(--rule-light);
+}
 
   .at-a-glance { background: var(--paper-2); border-left: 4px solid var(--violet); padding: 20px 24px; margin: 28px 0; }
   .at-a-glance .label { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--violet); display: block; margin-bottom: 14px; }
@@ -193,11 +223,13 @@
 <div class="masthead-title">
   <h1><em>Northern</em> <em class="violet">Bearing</em> <span class="sep">✦</span></h1>
   <p class="masthead-deck">The S&amp;P 500 broke 7,000 on ceasefire optimism. Then, before Monday's open, the <strong>USS Spruance fired on and seized the Iranian cargo ship <em>Touska</em></strong> in the Gulf of Oman, Iran vowed to retaliate, and the Strait of Hormuz closed again. This issue reflects what is confirmed, not what markets have yet to price.</p>
-  <div class="topic-bar">
-    Macro Signals <span class="sep">◆</span> Sector Watch <span class="sep">◆</span> ETF &amp; Index Intel <span class="sep">◆</span> Stock Spotlight <span class="sep">◆</span> Fixed Income &amp; Alternatives <span class="sep">◆</span> Currency &amp; Global Markets <span class="sep">◆</span> Platforms &amp; Tools <span class="sep">◆</span> Earnings &amp; Analyst Reads
-  </div>
-  <p class="masthead-disclaimer">For informational purposes only. Not financial advice. All investment decisions are the reader's own.</p>
 </div>
+
+<div class="topic-bar">
+  Macro Signals <span class="sep">◆</span> Sector Watch <span class="sep">◆</span> ETF &amp; Index Intel <span class="sep">◆</span> Stock Spotlight <span class="sep">◆</span> Fixed Income &amp; Alternatives <span class="sep">◆</span> Currency &amp; Global Markets <span class="sep">◆</span> Platforms &amp; Tools <span class="sep">◆</span> Earnings &amp; Analyst Reads
+</div>
+
+<p class="disclaimer-bar">For informational purposes only. Not financial advice. All investment decisions are the reader's own.</p>
 
 <div class="at-a-glance">
   <span class="label">◆ This Issue At A Glance</span>
