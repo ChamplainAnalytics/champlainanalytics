@@ -1,1 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northern Bearing — Issue #02 — Champlain Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,800;1,800&family=Cormorant+Sans:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A12;
+    --ink-2: #2A2A3A;
+    --ink-3: #5A5A72;
+    --paper: #F5F4F8;
+    --paper-2: #ECEAF2;
+    --paper-3: #DDDAE8;
+    --navy: #0D1B3E;
+    --navy-light: #D6DFF0;
+    --indigo: #2D2B8F;
+    --violet: #6B5FD4;
+    --violet-light: #E8E6F8;
+    --gold: #9A7B20;
+    --gold-light: #F5EDD4;
+    --green: #1A5C3A;
+    --green-light: #D4EDE0;
+    --red: #8B1A1A;
+    --red-light: #F5DADA;
+    --rule: 1.5px solid #0A0A12;
+    --rule-light: 1px solid #DDDAE8;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 44px;
+    padding-bottom: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* ── STICKY NAV ── */
+  .sticky-nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 44px;
+    background: var(--navy);
+    border-bottom: 2px solid var(--violet);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sticky-nav-wordmark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .sticky-nav-links {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+  }
+  .sticky-nav-links::-webkit-scrollbar { display: none; }
+  .sticky-nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8899cc;
+    text-decoration: none;
+    padding: 0 16px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.15s, background 0.15s;
+  }
+  .sticky-nav-links a:hover { color: #fff; background: rgba(107,95,212,0.15); }
+  .sticky-nav-issue {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--violet-light);
+    padding: 0 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── MASTHEAD ── */
+  .meta-bar {
+    background: var(--navy);
+    padding: 10px 20px;
+    margin: 0 -20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .masthead-title {
+    padding: 40px 0 20px;
+    border-bottom: var(--rule);
+  }
+  .masthead-title h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .masthead-title h1 em { font-style: italic; color: var(--ink); }
+  .masthead-title h1 em.violet { color: var(--violet); }
+  .masthead-title h1 .sep {
+    color: var(--paper-3);
+    font-style: normal;
+    font-size: 0.7em;
+    vertical-align: middle;
+    margin: 0 12px;
+  }
+  .masthead-deck {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink-2);
+    max-width: 680px;
+    margin: 20px 0 0;
+    line-height: 1.7;
+  }
+  .topic-bar {
+    background: var(--ink);
+    padding: 12px 20px;
+    margin: 20px -20px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .topic-bar .sep-dot { color: var(--violet); margin: 0 10px; }
+  .masthead-disclaimer {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--ink-3);
+    margin-top: 12px;
+    font-weight: 300;
+  }
+
+  /* ── AT A GLANCE ── */
+  .at-a-glance {
+    background: var(--paper-2);
+    border-left: 4px solid var(--violet);
+    padding: 20px 24px;
+    margin: 28px 0;
+  }
+  .at-a-glance .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 14px;
+  }
+  .at-a-glance ul { list-style: none; }
+  .at-a-glance li {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .at-a-glance li:last-child { margin-bottom: 0; }
+  .at-a-glance li .diamond { color: var(--violet); flex-shrink: 0; }
+
+  /* ── TICKERS ── */
+  .tickers-row { margin-bottom: 28px; }
+  .tickers-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .tickers-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ticker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .ticker.active { background: var(--navy); color: #fff; }
+  .ticker.secondary { background: var(--paper-2); border: 1px solid var(--paper-3); color: var(--ink-2); }
+  .ticker.watch { background: var(--violet-light); color: var(--indigo); }
+  .ticker.conviction { background: var(--gold-light); color: var(--gold); }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    margin-bottom: 40px;
+  }
+  .stat-cell { background: var(--paper); padding: 22px 20px; }
+  .stat-num {
+    font-family: 'Cormorant Sans', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--violet);
+    line-height: 1;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .stat-sub { font-size: 12px; color: var(--ink-2); font-weight: 300; line-height: 1.4; }
+
+  /* ── SECTION ── */
+  .section-block {
+    margin-bottom: 56px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .section-block:nth-child(1) { animation-delay: 0.05s; }
+  .section-block:nth-child(2) { animation-delay: 0.1s; }
+  .section-block:nth-child(3) { animation-delay: 0.15s; }
+  .section-block:nth-child(4) { animation-delay: 0.2s; }
+  .section-block:nth-child(5) { animation-delay: 0.25s; }
+  .section-block:nth-child(6) { animation-delay: 0.3s; }
+  .section-block:nth-child(7) { animation-delay: 0.35s; }
+  .section-block:nth-child(8) { animation-delay: 0.4s; }
+
+  .section-header {
+    position: relative;
+    padding-bottom: 16px;
+    border-bottom: var(--rule);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-num {
+    font-family: 'Cormorant Sans', serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: var(--paper-3);
+    position: absolute;
+    top: -10px; right: 0;
+    line-height: 1;
+    z-index: 0;
+    user-select: none;
+  }
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── CONVICTION SIGNAL ── */
+  .conviction-panel {
+    background: var(--gold-light);
+    border-left: 4px solid var(--gold);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .conviction-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .conviction-headline {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .conviction-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-2);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .conviction-disclaimer {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--ink-3);
+    font-weight: 300;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--paper-3);
+    border: 1px solid var(--paper-3);
+    margin-bottom: 20px;
+  }
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--paper-3);
+    border: 1px solid var(--paper-3);
+    margin-bottom: 20px;
+  }
+  .card { background: var(--paper); padding: 22px 20px; }
+  .card.highlight { background: var(--navy); }
+  .card.watch-hl { background: var(--violet-light); }
+  .card-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .card.highlight .card-label { color: var(--violet-light); }
+  .card.watch-hl .card-label { color: var(--indigo); }
+  .card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; line-height: 1.4; }
+  .card.highlight h4 { color: var(--paper); }
+  .card.watch-hl h4 { color: var(--indigo); }
+  .card p { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.65; }
+  .card.highlight p { color: #8899cc; }
+  .card.watch-hl p { color: var(--indigo); }
+
+  /* ── ACCOUNT NOTE ── */
+  .account-note {
+    background: var(--green-light);
+    padding: 10px 14px;
+    margin-top: 12px;
+    border-radius: 1px;
+  }
+  .account-note-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .account-note p { font-size: 12px; color: var(--green) !important; font-weight: 400; line-height: 1.5; }
+
+  /* ── SOURCE LINKS ── */
+  .src {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--violet);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    display: inline-block;
+    margin-top: 8px;
+    transition: color 0.15s;
+  }
+  .src:hover { color: var(--ink); }
+
+  /* ── SO WHAT BARS ── */
+  .so-what-featured {
+    background: var(--navy);
+    border-left: 4px solid var(--violet);
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+  .so-what-featured .sw-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--violet-light);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .so-what-featured p { font-size: 15px; font-weight: 300; color: #c0c8e0; line-height: 1.7; }
+  .so-what-featured p strong { color: #fff; font-weight: 500; }
+  .so-what-standard {
+    background: var(--paper-2);
+    border-left: 4px solid var(--violet);
+    padding: 18px 24px;
+    margin-top: 20px;
+  }
+  .so-what-standard .sw-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .so-what-standard p { font-size: 13px; font-weight: 300; color: var(--ink-2); line-height: 1.7; }
+
+  /* ── WEEK AHEAD ── */
+  .week-ahead-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: var(--rule);
+  }
+  .week-rule { flex: 1; height: 1px; background: var(--paper-3); }
+  .watch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    margin-bottom: 20px;
+  }
+  .watch-card { background: var(--paper); padding: 22px 20px; }
+  .watch-timing {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--violet);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .watch-num {
+    font-family: 'Cormorant Sans', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--violet);
+    line-height: 1;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .watch-card h4 { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 8px; line-height: 1.4; }
+  .watch-card p { font-size: 12px; font-weight: 300; color: var(--ink-2); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: var(--rule);
+    padding: 24px 0;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-left {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    line-height: 1.8;
+  }
+  .footer-right {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+  .footer-disclaimer {
+    border-top: var(--rule-light);
+    padding-top: 14px;
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 300;
+    line-height: 1.7;
+    width: 100%;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 780px) {
+    .sticky-nav-wordmark { display: none; }
+    .sticky-nav-issue { display: none; }
+    .sticky-nav-links { display: flex; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; width: 100%; }
+    .sticky-nav-links::-webkit-scrollbar { display: none; }
+    .sticky-nav-links a { font-size: 10px; padding: 0 14px; flex-shrink: 0; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .card-grid, .card-grid-3, .watch-grid { grid-template-columns: 1fr; }
+    .section-num { font-size: 60px; top: -4px; }
+    .footer { flex-direction: column; }
+    .footer-right { text-align: left; }
+    .masthead-title h1 { white-space: normal; }
+    .topic-bar { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+  @media (max-width: 480px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .masthead-title h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ STICKY NAV ═══════════ -->
+<nav class="sticky-nav">
+  <span class="sticky-nav-wordmark">Champlain <span style="color:var(--violet-light)">Analytics</span></span>
+  <div class="sticky-nav-links">
+    <a href="#macro">01 Macro</a>
+    <a href="#sector">02 Sector</a>
+    <a href="#etf">03 ETF</a>
+    <a href="#stocks">04 Stocks</a>
+    <a href="#fixed">05 Fixed Income</a>
+    <a href="#currency">06 Currency</a>
+    <a href="#platforms">07 Platforms</a>
+    <a href="#institutional">08 Institutional</a>
+    <a href="#week-ahead">Week Ahead</a>
+  </div>
+  <span class="sticky-nav-issue">Issue #02 · Apr 28</span>
+</nav>
+
+<!-- ═══════════ MASTHEAD ═══════════ -->
+<div class="meta-bar">◆ CHAMPLAIN ANALYTICS · NORTHERN BEARING · MONDAY, APRIL 28, 2026 · ISSUE #02 · STANDARD EDITION</div>
+
+<div class="masthead-title">
+  <h1><em>Northern</em> <em class="violet">Bearing</em> <span class="sep">✦</span></h1>
+  <p class="masthead-deck">Wednesday morning, the <strong>Bank of Canada</strong> and the Federal Reserve both announce rate decisions — on the same day, hours apart, with Mag-7 earnings hitting after the close. This issue is your map for the week that matters most in 2026.</p>
+  <div class="topic-bar">
+    <span>Macro Signals</span><span class="sep-dot">◆</span>
+    <span>Sector Watch</span><span class="sep-dot">◆</span>
+    <span>ETF &amp; Index Intel</span><span class="sep-dot">◆</span>
+    <span>Stock Spotlight</span><span class="sep-dot">◆</span>
+    <span>Fixed Income &amp; Alternatives</span><span class="sep-dot">◆</span>
+    <span>Currency &amp; Global Markets</span><span class="sep-dot">◆</span>
+    <span>Platforms &amp; Tools</span><span class="sep-dot">◆</span>
+    <span>Institutional Money</span>
+  </div>
+  <p class="masthead-disclaimer">For informational purposes only. Not financial advice. All investment decisions are the reader's own.</p>
+</div>
+
+<!-- ═══════════ AT A GLANCE ═══════════ -->
+<div class="at-a-glance">
+  <span class="label">◆ This Week at a Glance — Three Things That Will Move Your Portfolio</span>
+  <ul>
+    <li><span class="diamond">◆</span> <span><strong>Wednesday April 29 is the most consequential day of the year</strong> for Canadian investors: the Bank of Canada releases its rate decision and Monetary Policy Report at 9:45 AM ET — the first MPR to formally incorporate the Iran energy shock — followed by the Federal Reserve at 2:00 PM ET, and Microsoft, Alphabet, Meta, and Amazon earnings after the close.</span></li>
+    <li><span class="diamond">◆</span> <span><strong>The BoC's MPR language, not the rate call, is the number to read</strong>: March CPI hit 2.4% on a 21% gasoline surge — the largest single-month jump on record — while core inflation remains below 2% and unemployment sits at 6.7%. How Governing Council frames that tension sets the rate path for the rest of 2026.</span></li>
+    <li><span class="diamond">◆</span> <span><strong>The Strait of Hormuz remains largely closed, WTI enters the week above $96</strong>, and the IEA has characterized the disruption as the largest energy supply shock on record. Any diplomatic headline — in either direction — will move oil, CAD, XEG, CNQ, and Canadian inflation expectations simultaneously before any other event on the calendar does.</span></li>
+  </ul>
+</div>
+
+<!-- ═══════════ TICKERS ═══════════ -->
+<div class="tickers-row">
+  <span class="tickers-label">◆ Tickers &amp; Indices Tracked This Issue</span>
+  <div class="tickers-wrap">
+    <span class="ticker active">TSX</span>
+    <span class="ticker active">S&amp;P 500</span>
+    <span class="ticker active">NASDAQ</span>
+    <span class="ticker active">TSX:CNQ</span>
+    <span class="ticker active">TSX:ENB</span>
+    <span class="ticker active">TSX:RY</span>
+    <span class="ticker active">TSX:BCE</span>
+    <span class="ticker active">TSX:RCI.B</span>
+    <span class="ticker secondary">TSX:XIU</span>
+    <span class="ticker secondary">TSX:XIC</span>
+    <span class="ticker secondary">TSX:VGRO</span>
+    <span class="ticker secondary">TSX:XEF</span>
+    <span class="ticker secondary">VFV</span>
+    <span class="ticker secondary">QQQ</span>
+    <span class="ticker secondary">INTC</span>
+    <span class="ticker secondary">TSLA</span>
+    <span class="ticker secondary">SHOP</span>
+    <span class="ticker secondary">MSFT</span>
+    <span class="ticker secondary">AMZN</span>
+    <span class="ticker secondary">META</span>
+    <span class="ticker secondary">GOOGL</span>
+    <span class="ticker watch">◆ WATCH · TSX:CNQ</span>
+    <span class="ticker conviction">◆ CONVICTION · TSX:XEG</span>
+  </div>
+</div>
+
+<!-- ═══════════ STATS ROW ═══════════ -->
+<div class="stats-row">
+  <div class="stat-cell">
+    <span class="stat-label">Canada CPI · March 2026 · StatCan</span>
+    <span class="stat-num">2.4%</span>
+    <span class="stat-sub">Year-over-year. Energy +3.9% YoY; gasoline +21% MoM — record single-month surge. Core (trimmed mean/median) still below 2%. Wednesday's MPR models this.</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">Fed Funds Rate · Target Range · Fed.gov</span>
+    <span class="stat-num">3½–3¾%</span>
+    <span class="stat-sub">Held at two consecutive meetings (Jan 28, Mar 18). Decision April 29, 2:00 PM ET. No dot plot this meeting — statement language is all there is.</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">WTI Crude · Monday Open</span>
+    <span class="stat-num">~$96</span>
+    <span class="stat-sub">US$/bbl. Up from $94.40 Friday close as Iran talks stalled over the weekend. IEA: largest energy supply shock on record. Hormuz remains largely closed.</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-label">Gold · Friday Close · Approx.</span>
+    <span class="stat-num">~$4,700</span>
+    <span class="stat-sub">US$/oz. Down ~3% for the week — rising rate-hike expectations weigh on non-yielding bullion. Down ~10% from record highs set earlier in April.</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 01 — MACRO SIGNALS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="macro">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-tag">◆ Northern Bearing · Macro Signals</span>
+    <h2 class="section-title">Wednesday Morning: Two Central Banks, One Energy Shock</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ What to Read on Wednesday — BoC · April 29 · 9:45 AM ET</span>
+      <h4>The MPR Is More Important Than the Rate Call</h4>
+      <p>The Bank of Canada announces its overnight rate decision at 9:45 AM ET Wednesday, simultaneously releasing its quarterly Monetary Policy Report — the first MPR of 2026 to formally incorporate the Iran conflict into official BoC forecasts. Markets price a 93% probability of another hold at 2.25%, where the rate has sat since October 2025. But the hold itself is not the story. The MPR is. January's edition was written before the Strait of Hormuz closed and projected real GDP growth of approximately 1.1% for 2026. April's MPR arrives with March CPI at 2.4%, gasoline up 21% in a single month — the largest surge on record — and an unemployment rate at 6.7% after employment gains from Q4 2025 were largely reversed in January and February. Governing Council must now publish, on the record, how it is modelling a world where its two mandates — low inflation and full employment — are being pulled in opposite directions by the same external shock.</p>
+      <a class="src" href="https://www.bankofcanada.ca/2026/04/fad-announcement-release-mpr-2026-04-29/" target="_blank">↗ Bank of Canada — April 29 Rate Announcement</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ The Language to Watch · Governor Macklem · 10:30 AM ET</span>
+      <h4>Two Words That Determine the Rate Path for the Rest of 2026</h4>
+      <p>The March 18 BoC statement flagged that "the sharp increase in global energy prices has led to increases in gasoline prices, and this will push up total inflation in the coming months" — while also noting that "core inflation measures have come down and are all close to 2%." StatCan's March CPI release confirmed both halves of that sentence, with headline inflation at 2.4% driven entirely by energy while trimmed-mean and median core measures remained below the 2% target per TD Economics' analysis of the data. Wednesday's MPR will indicate whether the Bank views this divergence as transitory — which supports the hold-then-eventually-cut path — or persistent, which opens the door to hike risk in the second half of 2026. Most major Canadian bank economists, including TD, BMO, and National Bank, maintain a hold-through-2026 forecast. Scotiabank and CIBC dissent, projecting 0.75% of hikes by year-end. The MPR language will tell you which camp is reading the Bank correctly.</p>
+      <a class="src" href="https://www.bankofcanada.ca/2026/03/fad-press-release-2026-03-18/" target="_blank">↗ Bank of Canada — March 18 Rate Decision Statement</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ What to Read on Wednesday — FOMC · April 29 · 2:00 PM ET</span>
+      <h4>No Dot Plot — Every Word Carries Double Weight</h4>
+      <p>The Federal Reserve holds its April 28–29 meeting with a decision due at 2:00 PM ET Wednesday — confirmed in the March 17–18 FOMC minutes from federalreserve.gov. The federal funds rate target range is currently 3½%–3¾%, held at both the January 28 and March 18 meetings. April is not a projections meeting: no Summary of Economic Projections, no dot plot. That absence matters, because it concentrates all interpretive weight onto statement language. At the March meeting, the Committee added that "the implications of developments in the Middle East for the U.S. economy are uncertain" — the first explicit FOMC acknowledgement of the Iran conflict's macro risk. With core PCE now forecast at 2.7% for 2026 (revised up in March's SEP) and 16 of 19 participants flagging upside inflation risk, the key question on Wednesday is whether the Fed begins signalling that the one-cut median from the March dot plot is now at risk.</p>
+      <a class="src" href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260318.htm" target="_blank">↗ Federal Reserve — FOMC Minutes, March 17–18, 2026</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ The Internal Fed Split · Miran Dissent · March 18</span>
+      <h4>One Fed Governor Already Wanted to Cut. The Hawks May Now Want to Hike.</h4>
+      <p>At the March 18 FOMC meeting, the vote was 10–1: Governor Stephen Miran dissented in favour of a 25 basis point cut, believing slowing growth warranted easing. That dissent now looks like it arrived from one end of a spectrum that has since widened. March's SEP showed the number of participants flagging upside inflation risk rising from 12 to 16 out of 19. Some officials, per the minutes, "favoured a two-sided framing of future rate decisions, highlighting that additional increases could be warranted if inflation persists." The Fed is not close to hiking — but the internal debate has measurably shifted toward hawkishness since January. Wednesday's statement will either confirm that shift or soften it. For Canadian investors, the implication runs through CAD, GoC bond yields, and REIT valuations: a Fed that is moving away from its one-cut median is a Fed that keeps the rate differential with the BoC narrower, which limits BoC flexibility and keeps pressure on rate-sensitive sectors.</p>
+      <a class="src" href="https://am.jpmorgan.com/us/en/asset-management/liq/insights/portfolio-insights/fixed-income/fixed-income-perspectives/fomc-statement-march-2026/" target="_blank">↗ J.P. Morgan Asset Management — FOMC Statement March 2026 Analysis</a>
+    </div>
+  </div>
+
+  <div class="so-what-featured">
+    <span class="sw-label">So What — For the Self-Directed Investor · This Week's Key Takeaway</span>
+    <p>Wednesday is the most information-dense morning of the year for a Canadian investor, and most of it arrives before noon. <strong>At 9:45 AM ET, read the MPR — not the press release headline — because the inflation risk framing in that document will either keep rate-cut expectations alive or begin to bury them for 2026.</strong> Look specifically for how the Bank characterizes the March CPI spike: if they call it transitory and stress the labour market slack, the hold-then-cut thesis lives. If they shade toward "persistent upside risks," Scotiabank's hike call starts looking less lonely. Then at 2:00 PM ET, <strong>read the Fed statement for whether "implications of developments in the Middle East" softens or hardens relative to March — that single clause is the market's signal for whether one cut in 2026 becomes zero.</strong> The rate calls themselves — holds at both institutions — are priced in. What is not priced in is the language change. That is where Wednesday's market movement will come from.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 02 — SECTOR WATCH -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="sector">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-tag">◆ Northern Bearing · Sector Watch</span>
+    <h2 class="section-title">Which Sectors Move on Wednesday — and Which Way</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ The Setup Entering the Week</span>
+      <h4>TSX Entered Monday Down 1.29% on the Week. S&amp;P 500 at All-Time Highs.</h4>
+      <p>The TSX Composite closed Friday at 33,904 — down 442 points (1.29%) for the week — while the S&amp;P 500 closed at a new all-time high above 7,165 and the Nasdaq settled at record levels above 24,836. That divergence is the starting position for a week that could either compress or widen it. Canadian equities were pressured by rate uncertainty, telecom weakness (Rogers –3.7%, BCE –1%), and real estate declines. US equities rallied on strong Q1 earnings from Intel, Tesla, Boeing, and GE Vernova. The question entering this week: does Wednesday's BoC MPR language give domestic sectors a reason to close that gap, or does energy sector volatility driven by Hormuz headlines widen it further?</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Energy · The Week's Swing Variable</span>
+      <h4>XEG and CNQ Will Move on Diplomacy, Not Fundamentals, This Week</h4>
+      <p>Canadian energy enters the week as the TSX's year-to-date leader — CNQ is up 32% since January — with the sector's fortunes tightly coupled to Hormuz headlines rather than earnings or macro data for now. WTI opened Monday above $96 after Iran's foreign minister left Pakistan without meeting US officials, and Trump instructed negotiators to suspend talks. Any signal of resumed diplomacy could send WTI back toward $80 inside a session, erasing weeks of energy sector gains. Conversely, if talks remain suspended and the IEA's supply shock characterization persists, the sector's strong fundamental position — CNQ with a US$43 breakeven vs. $96 spot — remains intact. Energy investors need a view on Hormuz, not a view on Q2 oil sands production guidance, to manage positions this week.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Financials · Rate-Sensitive · Wednesday Risk</span>
+      <h4>Canadian Banks Are Exposed to MPR Language in Both Directions</h4>
+      <p>Canadian bank stocks — RY, BMO, TD — are in a holding pattern ahead of Wednesday. A dovish MPR that emphasizes labour market slack and keeps the eventual-cut narrative alive is broadly supportive of bank valuations: lower long rates ease the refinancing stress on mortgage books and improve net interest margin outlook. A hawkish MPR that signals potential rate hikes would be initially negative for bank stocks, as rising rates increase credit risk on variable-rate mortgage portfolios already stressed by elevated energy costs hitting consumer budgets. Sun Life Financial received a National Bank upgrade to outperform last week — a sign that the insurance sector, less directly exposed to mortgage books than the banks, may offer more defensive positioning in a volatile rate environment this week.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Telecoms &amp; REITs · Laggards with Structural Pressure</span>
+      <h4>Rogers and BCE Are Rate Stories, Not Energy Stories — and the Rate Picture Is Not Improving</h4>
+      <p>Canadian telecoms carry significant debt and are priced on spread-to-GoC yield logic. Rogers (RCI.B) and BCE entered last week already weak and finished it weaker. Neither company has a catalyst on the immediate horizon that changes this — both are waiting for rate relief that the BoC is not yet able to provide. REITs face the same structural headwind: FirstService fell 2.2% and Colliers pulled back 1.9% last week. The MPR on Wednesday will not rescue these sectors if it signals that rate cuts are further out than the market hoped. For self-directed investors, this week is a time to be cautious about adding to rate-sensitive positions ahead of a decision that could move either direction on the language, not just the headline rate.</p>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>The sector picture entering this week is simple: energy is a geopolitical binary, financials are a central bank language trade, and telecoms and REITs are waiting for rate relief that may not come. If you are holding XEG or CNQ, your risk this week is diplomatic, not economic — a peace headline can move oil 10% before you finish your coffee. If you are holding XIU or a broad Canadian equity ETF, your read on Wednesday is the BoC MPR language: hawkish or dovish determines whether the TSX closes its gap with the S&P 500 or lets it widen further into May. For investors holding US equity through VFV or QQQ, the week's risk is concentrated on Wednesday evening's Mag-7 earnings, not the macro decisions — US equities are at record highs on earnings momentum, and the question is whether Microsoft, Alphabet, Meta, and Amazon confirm or disappoint the AI capex narrative that got them there.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 03 — ETF & INDEX INTEL -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="etf">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-tag">◆ Northern Bearing · ETF &amp; Index Intel</span>
+    <h2 class="section-title">Where to Be Positioned Before Wednesday Lands</h2>
+  </div>
+
+  <!-- CONVICTION SIGNAL -->
+  <div class="conviction-panel">
+    <span class="conviction-label">◆ Conviction Signal · TSX:XEG · iShares S&amp;P/TSX Capped Energy Index ETF</span>
+    <h3 class="conviction-headline">Three Independent Signals Align — XEG Is the Cleanest Canadian Energy Vehicle Heading Into a Week Dominated by the Energy Shock</h3>
+    <p class="conviction-body">The case rests on three independent data streams, not one narrative. First, primary supply data: the IEA has described the Hormuz closure as the largest energy supply shock on record, and as of this Monday, peace talks remain suspended — Trump instructed negotiators to stand down over the weekend while Iran's foreign minister left Islamabad without meeting US officials. The disruption has not resolved and has no scheduled resolution date. Second, corporate fundamentals: XEG's largest holding, CNQ, operates with a WTI breakeven near US$43 per barrel — confirmed in company disclosures — against a current WTI spot price above $96. That margin funds debt reduction, share buybacks, and a dividend with 25 consecutive years of growth. Third, market action: XEG has been the TSX's year-to-date leader, with the broader Canadian energy sector outperforming the TSX Composite by a material margin. All three signals — supply disruption data, fundamental corporate positioning, and relative price performance — point the same direction. The bear case is clear and must be sized accordingly: a diplomatic breakthrough could send WTI back toward $70-80 inside a single trading session. That is a real risk. It is why this carries a Watch tag on the single-name level (CNQ) and a Conviction tag at the diversified ETF level: XEG provides exposure to the theme across 26 names, limiting single-event blowup risk while retaining the sector upside. The EIA Weekly Petroleum Status Report lands Wednesday at 10:30 AM ET, the same morning as the BoC. A large inventory build combined with hawkish MPR language could move XEG sharply lower before noon. Sizing should reflect that concentration of risk in a single morning.</p>
+    <a class="src" href="https://www.blackrock.com/ca/investors/en/products/239837/" target="_blank">↗ iShares Canada — XEG Fund Page</a>
+    <p class="conviction-disclaimer" style="margin-top:10px;"><em>This is not a recommendation. Do your own research before acting.</em></p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-label">◆ TSX:XIU / TSX:XIC · Domestic Core</span>
+      <h4>Both ETFs Are Wednesday Trades This Week</h4>
+      <p>XIU (iShares S&P/TSX 60 ETF) and XIC (iShares Core S&P/TSX Capped Composite ETF) enter the week at a technical disadvantage: the TSX underperformed the S&P 500 last week, and the reasons — rate uncertainty, energy volatility, telecom weakness — have not resolved. Both ETFs will move meaningfully on the BoC MPR language at 9:45 AM Wednesday. XIU's heavy weighting toward the big six banks makes it specifically sensitive to whether the rate path language is dovish (initially constructive for banks) or hawkish (initially negative). For investors who want Canadian broad exposure but less energy concentration, XIC's greater diversification across smaller caps offers a slight buffer relative to XIU against a sharp energy reversal on any Hormuz headline.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ VFV · Vanguard S&amp;P 500 ETF (CAD)</span>
+      <h4>At Records — Wednesday Evening Is the Next Test</h4>
+      <p>VFV entered this week with the S&P 500 at all-time highs above 7,165 in USD terms. At 73.17 cents on the dollar, every US dollar of S&P 500 return translates to approximately C$1.37 for the Canadian investor holding VFV — a currency amplifier that has been one of the quiet tailwinds of 2026 for TFSA portfolios holding US equity. Wednesday evening's earnings from Microsoft, Alphabet, Meta, and Amazon will be the next test of whether that S&P 500 record is sustainable or technically extended. If all four disappoint, VFV will pull back regardless of what the Fed says at 2 PM. If all four confirm the AI capex narrative, the record holds and extends.
+      <div class="account-note">
+        <span class="account-note-label">◆ RRSP Note</span>
+        <p>VFV held in an RRSP eliminates the 15% US dividend withholding tax that applies in a TFSA. For large US equity allocations, the RRSP is the more tax-efficient wrapper.</p>
+      </div></p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ VGRO / XEF · Balanced &amp; International</span>
+      <h4>VGRO's Week Is Determined by Its Components</h4>
+      <p>VGRO (Vanguard Growth ETF Portfolio) blends Canadian, US, and international equities at roughly 80/20 growth allocation. Its week will be determined by the same forces hitting its components separately: the BoC MPR (Canadian equity sleeve), Wednesday evening Mag-7 earnings (US equity sleeve), and the ECB decision and European energy inflation (XEF international sleeve). For self-directed investors who hold VGRO as a one-fund solution, the practical position is to let the portfolio breathe through Wednesday's events without reacting to individual session moves — the fund's diversification is precisely the protection against making a bad single-event decision on the most information-dense day of the year.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Gold ETFs · XGD / ZGD · Watching Rate Signals</span>
+      <h4>Gold Is Under Pressure From Rate-Hike Risk — Wednesday's Central Bank Language Is the Key</h4>
+      <p>Gold entered this week around US$4,700 per ounce — down approximately 3% for the prior week and roughly 10% below its April record highs — under pressure from rising expectations that elevated energy prices could push both the Fed and BoC toward hikes rather than cuts. Gold is a non-yielding asset: when real interest rate expectations rise, bullion becomes relatively less attractive. Wednesday's central bank language is the direct input to gold prices this week. Dovish language from both institutions — emphasising downside growth risk — would be supportive of gold. Hawkish language, signalling that the energy shock is producing durable inflation that requires rate increases, presses gold lower. Investors holding the iShares S&P/TSX Global Gold Index ETF (XGD) or BMO Equal Weight Global Gold Index ETF (ZGD) are positioned in a sector where Wednesday's word choices matter more than earnings or supply data this week.</p>
+      <div class="account-note">
+        <span class="account-note-label">◆ TFSA / RRSP Note</span>
+        <p>Gold ETFs held inside a TFSA shelter capital gains from the metal's price appreciation. Gold generates no dividends, so the TFSA is the preferred wrapper — the RRSP advantage on withholding tax applies to dividends, not commodity price gains.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>The ETF positioning message for this week is not to trade around the events — it is to understand which of your existing positions are most exposed to Wednesday morning. XEG and CNQ move on Hormuz headlines and the EIA inventory print at 10:30 AM ET. XIU and XIC move on BoC MPR language at 9:45 AM ET. VFV moves on Mag-7 earnings Wednesday evening. Gold ETFs move on central bank language tone across both decisions. If you hold all of these — which a standard diversified Canadian self-directed portfolio likely approximates — Wednesday is a day to read carefully, not a day to react. The worst ETF trade is the one made in the first hour after a headline you only half-understood.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 04 — STOCK SPOTLIGHT -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="stocks">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-tag">◆ Northern Bearing · Stock Spotlight</span>
+    <h2 class="section-title">What Last Week's Beats Mean for This Week's Calendar</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ INTC · Intel · Q1 2026 · What It Means for Wednesday Night</span>
+      <h4>Intel's AI Data Centre Beat Sets the Bar for Microsoft, Alphabet, Meta, Amazon</h4>
+      <p>Intel reported Q1 2026 results on April 23: revenue of $13.6 billion, up 7% year-over-year, confirmed in the SEC EDGAR 8-K filing dated April 23. Non-GAAP EPS came in at $0.29, materially above expectations. The data centre and AI division — the strategic core of the turnaround — generated $5.1 billion in revenue. The practical implication for this week: Intel's AI infrastructure beat raises the expectation floor for what Microsoft, Alphabet, Meta, and Amazon must deliver Wednesday night. Intel supplies the server-side architecture that runs the models these four companies build and deploy. If Intel's data centre revenue is growing 7% annually, the inference is that hyperscaler AI infrastructure spending continues at pace — which is precisely what Wednesday evening's earnings will either confirm or challenge. Investors holding VFV or QQQ should understand that the AI narrative entering Wednesday night's reports is already running hot.</p>
+      <a class="src" href="https://www.sec.gov/Archives/edgar/data/0000050863/000005086326000077/q126earningsrelease.htm" target="_blank">↗ SEC EDGAR — Intel Q1 2026 Form 8-K</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ TSLA · Tesla · Q1 2026 · Robotaxi Next</span>
+      <h4>21.7% Gross Margin Was the Print — Robotaxi Expansion Is the Forward Signal</h4>
+      <p>Tesla's Q1 2026 results — revenue $22.39 billion versus the $22.08 billion consensus, non-GAAP EPS $0.41 versus $0.35 estimated, and a gross margin of 21.7% against a 17.7% estimate — confirmed that the company's pricing and cost discipline is recovering. Deliveries of 358,023 units came in slightly below the 365,000 consensus, but the margin story dominated interpretation. More relevant to the week ahead: Tesla confirmed Robotaxi expansion to parts of Dallas and Houston over the weekend, extending the autonomous vehicle narrative that supports the stock's premium valuation. Tesla's Q1 print is not directly a Canadian equity story — it reaches Canadian portfolios through VFV and QQQ — but it establishes consumer tech as an earnings story that is holding, which matters for how Wednesday's Mag-7 results are framed by investors heading into that session.</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card watch-hl">
+      <span class="card-label">◆ WATCH · TSX:CNQ · Canadian Natural Resources</span>
+      <h4>The Fundamental Case Is Strong. The Diplomatic Risk Is Real. Know Which One You're Trading.</h4>
+      <p>CNQ enters this week up 32% year-to-date and approximately 9% below its all-time high set March 20 — when the initial ceasefire news temporarily sent WTI below $100. At a WTI spot price above $96 against CNQ's confirmed US$43 per barrel breakeven, the company's oil sands operations are generating extraordinary free cash flow. Management has committed to reducing net debt from C$16 billion toward C$13 billion and is actively buying back shares. CNQ holds 13.9 billion BOE of proved reserves across a production mix that includes synthetic crude, thermal bitumen, heavy oil, and natural gas. The 25-year consecutive dividend growth streak has survived three oil price cycles. The fundamental thesis does not require diplomacy — it requires only that WTI stays above $43. The risk this week is that it does not: any substantive signal of resumed US-Iran negotiations would send WTI sharply lower, and CNQ would follow. What to watch specifically: the EIA Weekly Petroleum Status Report Wednesday at 10:30 AM ET, and any diplomatic headlines from Pakistani mediators. The Hormuz situation, not the BoC decision, is the primary variable for this name this week.</p>
+      <a class="src" href="https://nai500.com/blog/2026/04/geopolitical-risks-trigger-pullback-creating-a-rare-entry-point-for-this-canadian-resource-stock/" target="_blank">↗ NAI 500 — CNQ Breakeven and Reserves Analysis</a>
+      <div class="account-note" style="margin-top:12px;">
+        <span class="account-note-label">◆ TFSA Note</span>
+        <p>CNQ's dividend qualifies for the Canadian dividend tax credit in non-registered accounts. Inside a TFSA, both the dividend and capital appreciation accumulate tax-free — preferred for long-term holders expecting ongoing buyback-driven appreciation.</p>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ SHOP · Shopify · May 5 — Mark the Calendar</span>
+      <h4>Q1 Results Before Open on May 5 — The First Major Canadian Tech Event of 2026</h4>
+      <p>Shopify confirmed via GlobeNewswire on April 14 that Q1 2026 results will be published before markets open on Tuesday, May 5, with a management conference call at 8:30 AM ET. The company guided for revenue growth in the low 30% year-over-year range and has positioned AI commerce integration as a central growth driver heading into 2026. At approximately $135 per share, SHOP trades on elevated expectations relative to near-term earnings. The Q1 print will be the first significant test of whether macro headwinds — elevated energy costs compressing consumer discretionary spending, softening business confidence — have created friction in merchant gross merchandise volume. Canadian investors holding SHOP directly on Wealthsimple or Questrade should prepare to read the pre-open release before the TSX opens on May 5. The stock is likely to move sharply in the first session after the print.</p>
+      <a class="src" href="https://www.stocktitan.net/news/SHOP/shopify-to-announce-first-quarter-2026-financial-results-may-5-tejafpbif6fu.html" target="_blank">↗ GlobeNewswire — Shopify Q1 2026 Earnings Date Confirmation</a>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>The stock-level picture entering this week has two distinct timelines. The immediate one — Wednesday night — is about whether Microsoft, Alphabet, Meta, and Amazon confirm the AI capex narrative that Intel's data centre beat suggested is intact. Those results affect VFV and QQQ holders more directly than anything else on the Canadian calendar this week. The slower-burning one is CNQ: the fundamental case for holding it is not in dispute at $94-96 WTI, but the diplomatic risk is live and concentrated in a single geopolitical relationship. If you hold CNQ as a meaningful position, your primary job this week is not to read the BoC MPR — it is to track whether Pakistan's mediation channel reopens. And for Shopify holders, May 5 is the date, the release is before open, and the story is whether 30% revenue growth holds in a consumer environment where energy inflation is compressing household budgets across Canada.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 05 — FIXED INCOME, REITs & ALTERNATIVES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="fixed">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-tag">◆ Northern Bearing · Fixed Income, REITs &amp; Alternatives</span>
+    <h2 class="section-title">Wednesday's Language Determines the Rate Trade for the Rest of 2026</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Government of Canada Bonds · The Wednesday Variable</span>
+      <h4>5-Year GoC Yield Will Move on MPR Language — Not the Rate Call</h4>
+      <p>The 5-year Government of Canada bond yield — the benchmark for fixed mortgage rates and a key input to REIT valuations — currently sits around 3.69%, down considerably from the 2023 peak near 5.50%. That yield level reflects market pricing of a BoC that is on hold but eventually cutting. If Wednesday's MPR shifts language toward persistent inflation risk or signals that the rate path may be higher than previously communicated, 5-year GoC yields will move higher before Thursday's open — pushing fixed mortgage rates up and applying additional pressure to REIT valuations and mortgage renewal costs. Conversely, a dovish MPR that emphasises the 6.7% unemployment rate and below-2% core inflation measures would be supportive of current yield levels. The BoC hold itself changes nothing in bond markets; the forward guidance embedded in the MPR changes everything.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ GICs · Window Is Open — But Read Wednesday First</span>
+      <h4>3.5–4% for One Year Is a Real Return. Lock-In Risk Depends on Wednesday's Language.</h4>
+      <p>With the BoC on hold at 2.25% and core inflation below the 2% target, 1-year GIC rates in the 3.5–4% range represent a genuine real return for the conservative portion of a self-directed portfolio. That argument is straightforward and well-established. The complicating variable this week: if Wednesday's MPR signals rising rate hike risk — driven by the March CPI surge and the prospect that energy-driven inflation will persist into Q3 — GIC rates could drift higher later in 2026 as the rate path shifts. Locking into a 1-year GIC inside a TFSA at 3.5–4% now is still a defensible decision; locking into a 5-year GIC may leave rate gains unrealized if Scotiabank and CIBC's hike forecasts prove correct. The practical guidance: wait until Wednesday afternoon before committing to GIC terms longer than 12–18 months.
+      <div class="account-note" style="margin-top:12px;">
+        <span class="account-note-label">◆ TFSA Note</span>
+        <p>GIC interest is fully taxable in a non-registered account. The same GIC inside a TFSA shelters all interest income. With $7,000 of new annual room and $109,000 in cumulative room available, the TFSA is the first place to hold interest-generating fixed income.</p>
+      </div></p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Gold · ~US$4,700 · Rate Risk Is the Near-Term Headwind</span>
+      <h4>Down 3% Last Week, Down 10% From Record — Watching for a Central Bank Catalyst</h4>
+      <p>Gold entered this week around US$4,700 per ounce, having declined approximately 3% last week as rising rate-hike expectations globally weighed on non-yielding bullion. The metal is approximately 10% below its April record highs. The logic is direct: gold generates no yield, so when central banks signal higher-for-longer rates, the opportunity cost of holding gold versus interest-bearing instruments rises. The same energy shock driving Canadian CPI higher is making central banks globally more hawkish — and that hawkishness is pressing gold lower near-term despite the geopolitical environment that would ordinarily support it. Wednesday's central bank language is the first major catalyst of the week for gold. If Powell and Macklem both signal that inflation persistence is the dominant risk, gold faces continued selling. If both emphasize downside growth risks and signal caution about further tightening, gold stabilises or recovers. Goldman Sachs maintained its US$5,400 year-end target; J.P. Morgan sees $6,000–$6,300 — both outlooks depend on the rate path.</p>
+      <a class="src" href="https://tradingeconomics.com/commodity/gold" target="_blank">↗ Trading Economics — Gold Price (Live Data)</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Canadian REITs · Waiting for Relief That May Not Come This Week</span>
+      <h4>REITs Need a Dovish MPR — and Wednesday May Not Deliver One</h4>
+      <p>Canadian REITs are priced on the spread between their distribution yields and Government of Canada bond yields. That spread is currently compressed, and the sector has been a consistent laggard: FirstService fell 2.2% and Colliers International pulled back 1.9% last week. The sector needs one thing to recover: convincing forward guidance that rates are heading lower. Wednesday's MPR may not provide it. If the Bank of Canada signals that the energy shock is producing inflation persistence that prevents near-term cuts — the scenario Scotiabank and CIBC are both modelling — REIT valuations face additional compression. Industrial and grocery-anchored REITs with long-term leases have held better than office-heavy structures, but the sector broadly is not a place to add new capital ahead of a central bank announcement that could move yields in either direction by Wednesday's close.</p>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>The fixed income message for this week has a clear sequencing. First, let Wednesday happen. The BoC MPR language will either confirm or revise the rate path, and that revision will immediately reprice GoC bonds, GIC forward expectations, and REIT valuations. Second, if Wednesday's MPR is dovish — consistent with the TD-BMO-National Bank hold-then-cut consensus — short-duration GICs inside your TFSA at 3.5–4% remain an attractive placement for the defensive component of your portfolio. Third, if the MPR is hawkish, GIC rates will likely drift higher through the summer, and waiting to lock in longer durations may prove correct. On gold: the Wednesday central bank double-header is both the risk and the potential catalyst. If you hold gold ETFs inside your TFSA, position sizing should reflect that the metal could move 3–5% in either direction on Wednesday's language before the North American equity session closes.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 06 — CURRENCY & GLOBAL MARKETS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="currency">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-tag">◆ Northern Bearing · Currency &amp; Global Markets</span>
+    <h2 class="section-title">CAD at 73.17¢ — Oil and the Fed Both Move It This Week</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ CAD/USD · The Week's Currency Logic</span>
+      <h4>The Petrocurrency Paradox: Oil at $96, CAD at 73¢ — and Both Could Move Sharply on Wednesday</h4>
+      <p>The Canadian dollar entered Monday at 73.17 cents US. Under conventional petrocurrency theory, WTI above $96 should be pushing CAD meaningfully higher — Canada is a major crude exporter and the currency historically tracks oil with a meaningful correlation. That the CAD is trading well below parity reflects several competing pressures: global growth fears from the energy shock itself, US dollar strength from a Fed that is not cutting, and a BoC that is on hold rather than easing. Wednesday changes the calculus on two of those three variables simultaneously. At 9:45 AM ET, the BoC MPR will signal whether Canadian monetary policy is stable or shifting toward hike risk — which directly affects the CAD rate differential with the USD. At 2:00 PM ET, the Fed statement will signal whether the rate differential is narrowing or holding steady. A dovish BoC combined with a hawkish Fed would weaken CAD; the reverse would strengthen it. For Canadian investors holding US-listed ETFs, the currency move Wednesday could be as significant as the equity move.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Your US Holdings at 73.17¢ — The Amplifier Effect</span>
+      <h4>Every 1% S&amp;P 500 Gain Nets Approximately 1.37% in Canadian Dollars at Current Rates</h4>
+      <p>At 73.17 cents on the dollar, Canadian investors holding VFV, SPY, or QQQ are running an embedded currency leverage that amplifies US market returns in Canadian dollar terms. A 1% S&P 500 gain generates approximately a 1.37% gain in CAD-denominated portfolio value before fees. That amplifier has been one of the quieter tailwinds of a 2026 in which the S&P 500 has hit multiple record highs. The risk that reverses this benefit is a strengthening CAD — which would happen most immediately if an Iran deal is struck and WTI falls sharply back toward the $70s, simultaneously removing the energy inflation premium that has been capping CAD strength. It is a linked risk: the scenario that would hurt XEG and CNQ the most would also reduce the CAD currency amplifier on your US equity positions. Both positions move in the same direction on an Iran peace headline.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Global Central Banks This Week · A Crowded Calendar</span>
+      <h4>Fed, BoC, ECB, BoJ, BoE — Five Major Central Banks Announce This Week</h4>
+      <p>This is one of the most concentrated weeks of central bank activity of the year. The Federal Reserve and Bank of Canada announce April 29; the European Central Bank, Bank of Japan, and Bank of England also have scheduled meetings this week. Each decision carries its own currency and rate implications, but the ECB's communication is particularly relevant to the XEF component in diversified Canadian portfolios: European equities have been pressured by Brent crude above $105 per barrel and its downstream effect on manufacturing input costs, and any ECB signal of prolonged tightening would add to that pressure. The Bank of Japan's stance on yield curve control continues to influence global bond flows, including GoC bond demand. A week with five major central bank announcements is a week where the primary risk is not any single decision but the aggregate signal — are central banks, globally, becoming more or less hawkish in response to the energy shock?</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Asia-Pacific · Monitoring China Demand Risk</span>
+      <h4>China's Industrial Activity Is the Key Swing Variable for Oil Demand — and Therefore for Everything</h4>
+      <p>Japan's exports rose for a seventh consecutive month as of the March data, posting a trade surplus supported by auto and semiconductor demand. South Korea's Kospi entered the week near record highs. But the most consequential Asian variable for Canadian investors this week is China: any further softening in Chinese industrial production data would add downward pressure to global oil demand expectations, potentially moderating WTI even without a Hormuz resolution. Chinese demand for crude — the largest single import market — is one of two forces that could move oil lower this week without a diplomatic breakthrough. The other is US crude inventory data from the EIA on Wednesday morning. A combination of large inventory build plus weak Chinese demand signals would challenge the energy sector thesis regardless of diplomatic headlines. Canadian energy investors should watch both the EIA release and any Chinese industrial data that surfaces mid-week.</p>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>At 73.17 cents, the CAD is working in your favour if you hold US equity — but that amplifier is contingent on the currency staying where it is. Wednesday creates two simultaneous CAD variables: the BoC MPR language (which determines Canadian rate path expectations) and the FOMC statement (which determines the US-Canada rate differential). A shift in either direction — more hawkish BoC, more dovish Fed, or the reverse — will move the loonie before Thursday's open. For investors who are considering rebalancing between Canadian and US exposure this week, Wednesday afternoon, after both central bank decisions are in the market, is a better moment to act than Monday morning before either has been announced. Patience this week is not passive — it is strategic.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 07 — PLATFORMS & TOOLS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="platforms">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-tag">◆ Northern Bearing · Platforms &amp; Tools</span>
+    <h2 class="section-title">Two Things to Do Before Wednesday Markets Open</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ CRA My Account · Do This Today</span>
+      <h4>April Is the One Month When Your TFSA Contribution Room Is Actually Accurate</h4>
+      <p>The CRA processes and uploads TFSA transaction data from the prior calendar year every spring. Per Canada.ca, April 2026 is when 2025 transactions are reflected in your CRA My Account — making this the one month in the year when the room figure you see is genuinely current. The 2026 annual TFSA limit is $7,000, unchanged from 2025 and 2024. For those who have been eligible since TFSA inception in 2009, cumulative lifetime room is $109,000. The most common and costly error: checking the CRA account in January or February, seeing a large room figure, contributing the full amount, and then discovering the institution had not yet transmitted contributions made earlier in the year. That gap creates an over-contribution — taxed at 1% per month until corrected. Before you make any 2026 TFSA contribution, log into CRA My Account, confirm the figure, and cross-reference it against your brokerage statements. Do it today, before Wednesday creates a reason to be distracted.</p>
+      <a class="src" href="https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/tax-free-savings-account/contributing.html" target="_blank">↗ CRA Canada.ca — Contributing to a TFSA</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ EIA Weekly Petroleum Status Report · Wednesday 10:30 AM ET</span>
+      <h4>The Number That Moves Oil Before the BoC Decision Does — Free at EIA.gov</h4>
+      <p>The US Energy Information Administration releases its weekly crude oil inventory data every Wednesday at 10:30 AM ET — 45 minutes after the BoC rate announcement lands. This week, both arrive on the same morning. For any investor holding XEG, CNQ, ENB, or SU, the EIA inventory number is the energy-sector signal of the session, and it is available directly from eia.gov rather than through financial media interpretation of it. US crude inventories have been running near three-year highs despite the Strait of Hormuz supply shock — a build that reflects strong domestic production offsetting reduced seaborne imports. A large inventory build this Wednesday, combined with any dovish surprise in BoC language about oil's economic impact, could move Canadian energy equities sharply lower before noon. A draw — unexpected inventory decline — would reinforce the supply-shock thesis. Bookmark the link. Read the primary release. Do not wait for BNN to tell you what the number means.</p>
+      <a class="src" href="https://www.eia.gov/petroleum/supply/weekly/" target="_blank">↗ EIA — Weekly Petroleum Status Report</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ CIRO · Short-Sale Data · Primary Regulatory Source</span>
+      <h4>Short Interest in Canadian Energy Names — Track It from the Regulator, Not a Screen</h4>
+      <p>The Canadian Investment Regulatory Organization publishes bimonthly short-sale trading statistics by security — a primary regulatory dataset that shows short interest changes in TSX-listed names without the latency or interpretation layer of brokerage-compiled screens. For investors watching CNQ or ENB during the current oil price volatility, CIRO's short interest data provides a cleaner picture of institutional positioning than any financial media summary. In a geopolitically driven market, short interest in energy names typically compresses when the supply shock narrative dominates and expands when diplomatic resolution looks likely. The data is free at ciro.ca. It is the kind of primary-source differentiation that separates serious self-directed investors from those relying entirely on financial headlines.</p>
+      <a class="src" href="https://www.ciro.ca" target="_blank">↗ CIRO — Short Sale Regulatory Data</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Variable Rate Mortgage Holders · April 29 Directly Affects You</span>
+      <h4>The Rate Hold Changes Nothing. The MPR Language Might Change Everything You Expect.</h4>
+      <p>If the BoC holds at 2.25% Wednesday — the near-certain outcome — variable rate mortgage holders using Wealthsimple Mortgages, TD, or any major lender see no change in monthly payments. The prime rate at major Canadian banks sits at approximately 4.95%, and that number does not move on a hold. What may move is your expectation of when relief arrives. Canadian households carry approximately C$2.6 trillion in total debt, and 60% of mortgage holders renewing in 2025–2026 are facing higher payments than when they originally signed, having locked in during the 2020–2021 rate trough. If Wednesday's MPR signals that the energy shock has pushed rate cuts further into the future — or raised hike risk — those renewal conversations with your lender become structurally more difficult. Read the MPR, not just the press release, before your next renewal appointment.</p>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>Two practical actions before Wednesday. First: log into CRA My Account and confirm your TFSA contribution room — April is the month when the number is actually accurate, and contributing on a stale figure is the most common self-inflicted TFSA error. Second: bookmark eia.gov/petroleum/supply/weekly/ and check it Wednesday morning at 10:30 AM ET if you hold any energy exposure. Those two actions take less than fifteen minutes and put you in front of the week's most important data before financial media has had time to frame it for you. The rest of the week's tools — the BoC press release, the Fed statement, the company earnings filings — are all free and available at primary sources faster than any aggregator will serve them to you. Self-directed means exactly that.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SECTION 08 — INSTITUTIONAL MONEY -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="institutional">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-tag">◆ Northern Bearing · Institutional Money</span>
+    <h2 class="section-title">What CPP and the Maple 8 Have Riding on This Week</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card highlight">
+      <span class="card-label">◆ Maple 8 · The Dual Exposure That Makes This Week Significant</span>
+      <h4>Canada's Pension Funds Are Long Both the AI Trade and the Energy Commodity Cycle</h4>
+      <p>Canada's eight largest pension funds — CPP Investments ($714.4 billion in assets), CDPQ, Ontario Teachers', OMERS, AIMCo, HOOPP, PSP, and BCI — hold two of the week's most contested asset categories simultaneously: global technology through their passive and active equity mandates, and Canadian and global energy through direct oil sands investments and infrastructure holdings. This week's calendar — Mag-7 earnings Wednesday night, and ongoing Hormuz supply shock through every session — is a simultaneous test of both exposures. CPP Investments has significant energy real assets that are generating exceptional free cash flow at $96 WTI, while its technology mandates are holding US equities at record highs. The Maple 8 funds managing the retirement capital of most employed Canadians have seldom entered a week with both of their largest alpha drivers so directly in play at the same time.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Nvidia · $5 Trillion · Institutional Rebalancing Signal</span>
+      <h4>Nvidia's Return to $5T Is a Passive-Index Rebalancing Event, Not Just a Headline</h4>
+      <p>Nvidia crossed the $5 trillion market capitalization threshold again on Friday as Intel's Q1 results confirmed AI infrastructure momentum and AMD surged 13% in the same session. Nvidia had first reached $5 trillion in October 2025, retreated, and has now recovered that level. For institutional investors holding S&P 500 index funds — which include the Maple 8 pension funds through their passive mandates — Nvidia's weight in the index has grown to the point where its price movement creates mechanical rebalancing requirements. A Nvidia that holds above $5 trillion heading into Wednesday's Mag-7 earnings is a Nvidia that remains the index's largest or near-largest single holding. The practical implication: if Wednesday's tech earnings disappoint and Nvidia pulls back sharply, passive rebalancing flows across the index would compound the sell-off rather than dampen it. This is the systemic link between the individual earnings reports and the broader index that institutional risk managers are monitoring this week.</p>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ 13F Filing Season · May Watch</span>
+      <h4>What Institutional Q1 Positioning Reveals — Data Due Mid-May</h4>
+      <p>Institutional investors managing more than $100 million in US-listed securities must file 13F quarterly reports with the SEC within 45 days of quarter-end — which means Q1 2026 holdings data will be publicly available by mid-May. That dataset will reveal how major US and Canadian institutional managers repositioned during Q1's oil price surge, S&P 500 record-high run, and geopolitical volatility. For investors tracking Canadian energy specifically, the 13F data will show whether large US institutions increased or reduced exposure to CNQ's NYSE-listed shares (CNQ is dual-listed), ENB's US-traded depository receipts, and Canadian energy ETFs during the quarter. The Maple 8 pension funds are not 13F filers — they report through their own annual disclosure frameworks — but the Maple 8 annual reports from CPP Investments and Ontario Teachers' are published in the coming months and will provide the Canadian institutional positioning context. The CPP Investments Q4 2025 annual report, which would cover oil sands positioning, is the one to read when it publishes.</p>
+      <a class="src" href="https://www.cppinvestments.com" target="_blank">↗ CPP Investments — Annual Reporting</a>
+    </div>
+    <div class="card">
+      <span class="card-label">◆ Berkshire Hathaway · Energy Frame</span>
+      <h4>Buffett's Occidental Position Was Built Before the Crisis — That's the Signal</h4>
+      <p>Berkshire Hathaway holds a significant position in Occidental Petroleum — accumulated across 2025 through a disciplined, multi-tranche acquisition program that is now sitting on substantial unrealised gains at $96 WTI. The institutional signal in that Berkshire position is not the oil price itself; it is the timeline. Buffett built the position before the Iran conflict, when WTI was lower and the energy trade was less crowded. CNQ's 25-year dividend growth streak and US$43 breakeven represents the Canadian structural equivalent of that thesis: a low-cost, long-reserve, shareholder-return-disciplined energy company built to generate free cash flow across commodity cycles. For self-directed investors, the lesson is not to buy CNQ because Berkshire bought Occidental — it is to understand that the energy sector's strongest companies are built on cost structure and reserve life, not on the current price of oil. Wednesday's diplomatic headlines will not change CNQ's breakeven. They will, however, temporarily reprice the stock.</p>
+    </div>
+  </div>
+
+  <div class="so-what-standard">
+    <span class="sw-label">So What — For the Self-Directed Investor</span>
+    <p>The institutional framing for this week offers one useful discipline: Canada's Maple 8 pension funds built their energy exposure before this crisis, and they will hold it through it — they are not repositioning on Wednesday morning based on whatever the MPR says. They have the time horizon to absorb the volatility. Self-directed investors in TFSAs and RRSPs have the same structural advantage if they use it: tax-sheltered compounding favours the long-term holder who does not react to every central bank language shift. The practical counterpoint is that you also have concentrated position risk that CPP Investments, with $714.4 billion diversified across asset classes, does not face. Knowing which institutional logic applies to your specific position — patience for well-researched long-term holds, discipline for concentrated energy exposure in a binary geopolitical week — is the distinction that matters this week.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- WEEK AHEAD -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="section-block" id="week-ahead">
+  <div class="week-ahead-header">
+    <span class="section-tag">◆ Northern Bearing · Week Ahead</span>
+    <div class="week-rule"></div>
+    <span class="section-tag" style="color:var(--ink-3);">April 28 – May 5, 2026</span>
+  </div>
+
+  <div class="watch-grid">
+    <div class="watch-card">
+      <span class="watch-timing">◆ Wednesday · April 29 · 9:45 AM ET</span>
+      <span class="watch-num">BoC</span>
+      <h4>Bank of Canada Rate Decision + Monetary Policy Report</h4>
+      <p>The rate call is a hold at 2.25% — priced at 93% by markets. Read the MPR. The key question: does the Bank frame the energy-driven inflation spike as transitory, in line with TD-BMO-National Bank consensus, or does it signal upside risk to the rate path as Scotiabank and CIBC project? Governor Macklem's press conference at 10:30 AM ET is where the real language will land. Watch for how the Bank characterises "core inflation" versus "headline" — that framing determines whether June 10 (the next decision) becomes a live event.</p>
+      <a class="src" href="https://www.bankofcanada.ca/press/upcoming-events/" target="_blank">↗ Bank of Canada — April 29 Upcoming Events</a>
+    </div>
+    <div class="watch-card">
+      <span class="watch-timing">◆ Wednesday · April 29 · 10:30 AM ET</span>
+      <span class="watch-num">EIA</span>
+      <h4>US Weekly Petroleum Status Report — Inventory vs. Supply Shock</h4>
+      <p>Forty-five minutes after the BoC decision, the EIA releases US crude oil inventory data for the prior week. US inventories have been climbing toward near three-year highs despite the Hormuz supply shock — a dynamic that should, in theory, moderate the WTI price premium. A large inventory build this Wednesday would test the supply-shock narrative and could send XEG and CNQ lower before noon. A draw would reinforce it. This is the energy market's primary data event of the week, and it arrives in the same morning as the BoC. Read it at eia.gov before any media interpretation reaches you.</p>
+      <a class="src" href="https://www.eia.gov/petroleum/supply/weekly/" target="_blank">↗ EIA.gov — Weekly Petroleum Status Report</a>
+    </div>
+    <div class="watch-card">
+      <span class="watch-timing">◆ Wednesday · April 29 · 2:00 PM ET</span>
+      <span class="watch-num">Fed</span>
+      <h4>FOMC Decision — No Dot Plot. Statement Language Is Everything.</h4>
+      <p>The Federal Reserve holds its target range at 3½%–3¾%, confirmed at two consecutive meetings and confirmed by the March 17–18 FOMC minutes (fed.gov). April 29 is not a projections meeting — no dot plot, no updated SEP. The March statement added that "implications of developments in the Middle East for the U.S. economy are uncertain." Watch whether that clause is softened, hardened, or expanded. With 16 of 19 FOMC participants flagging upside inflation risk in March and core PCE forecast at 2.7% for 2026, any signal that the one-cut median is deteriorating toward zero cuts is the statement's most market-moving possibility. Powell's press conference immediately follows.</p>
+      <a class="src" href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm" target="_blank">↗ Federal Reserve — March 18 FOMC Statement (for comparison)</a>
+    </div>
+  </div>
+
+  <div class="watch-grid">
+    <div class="watch-card">
+      <span class="watch-timing">◆ Wednesday · April 29 · After Close</span>
+      <span class="watch-num">Mag-7</span>
+      <h4>Microsoft, Alphabet, Meta, Amazon — Four Reports. One Night. The AI Capex Test.</h4>
+      <p>Four of the five largest companies in the world report Q1 2026 earnings after Wednesday's close. The shared narrative across all four is AI capital expenditure: are the hundreds of billions being committed to data centres generating commensurate revenue growth in their respective AI product lines? Intel's Q1 data centre beat of $5.1 billion sets a high bar for the infrastructure thesis. Tesla's margin recovery confirms enterprise tech execution is holding despite macro noise. If Microsoft, Alphabet, Meta, and Amazon collectively disappoint on AI revenue growth, the S&P 500's record-high position becomes technically precarious and VFV holders face a meaningful drawdown. Apple reports Thursday after close. This is the earnings calendar's peak week.</p>
+    </div>
+    <div class="watch-card">
+      <span class="watch-timing">◆ Thursday · April 30 · 8:30 AM ET</span>
+      <span class="watch-num">GDP</span>
+      <h4>US Advance Q1 2026 GDP + Core PCE + Employment Cost Index</h4>
+      <p>The Bureau of Economic Analysis releases its advance Q1 2026 GDP estimate Thursday morning — simultaneously with Core PCE (the Fed's preferred inflation gauge) and the Employment Cost Index. Context: Q4 2025 GDP was revised down to 0.5% on the third estimate, from 1.4% at the advance stage. Q1 sat in a more disrupted environment: oil near $100, geopolitical uncertainty from late February, and confidence data showing headwinds. If the Q1 advance print comes in below 1% — suggesting the economy is absorbing the energy shock more painfully than expected — it reinforces the BoC and FOMC's hold-and-wait stance and is broadly supportive of risk assets. A stronger print would increase hike pressure. This data lands the morning after the Fed decision, which means markets will be interpreting all three GDP, PCE, ECI numbers through whatever framework Powell's Wednesday press conference established.</p>
+    </div>
+    <div class="watch-card">
+      <span class="watch-timing">◆ Tuesday · May 5 · Pre-Market Open</span>
+      <span class="watch-num">SHOP</span>
+      <h4>Shopify Q1 2026 Earnings — Canada's Tech Bellwether Reports</h4>
+      <p>Shopify reports Q1 2026 results before markets open on May 5, with a management conference call at 8:30 AM ET. The company guided for revenue growth in the low 30% year-over-year range and has framed AI commerce as a structural growth driver. The Q1 print is the first significant test of whether elevated consumer energy costs and softening business confidence have created friction in merchant GMV — the core metric that drives Shopify's revenue. Canadian investors holding SHOP on Wealthsimple or Questrade should read the release before the TSX opens on May 5. The stock is likely to move sharply in the first session, and reading the management commentary before the opening session is the difference between a reactive and an informed position.</p>
+      <a class="src" href="https://www.stocktitan.net/news/SHOP/shopify-to-announce-first-quarter-2026-financial-results-may-5-tejafpbif6fu.html" target="_blank">↗ GlobeNewswire — Shopify Q1 2026 Earnings Date</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div style="flex:1;">
+    <div class="footer-left">
+      Northern Bearing · Issue #02 · Published Monday, April 28, 2026<br>
+      Champlain Analytics · champlainanalytics.ca/northern-bearing/<br>
+      Primary sources: Statistics Canada · Bank of Canada · Federal Reserve (fed.gov) · SEC EDGAR<br>
+      EIA · J.P. Morgan Asset Management · TD Economics · CPP Investments · CRA Canada.ca · CIRO<br>
+      Supporting: Trading Economics · GlobeNewswire · NAI 500 · Baystreet.ca
+    </div>
+    <div class="footer-disclaimer">
+      Northern Bearing is published by Champlain Analytics for informational purposes only. Nothing in this publication constitutes financial advice, investment advice, or a recommendation to buy or sell any security. All investment decisions are the sole responsibility of the reader. Signal tags (◆ WATCH, ◆ NOTABLE MOVE, ◆ CONVICTION SIGNAL) are editorial signals only — they are not buy or sell recommendations. Champlain Analytics is not a registered investment advisor. Past performance is not indicative of future results. Sources are cited for informational context; readers should verify all data independently before making investment decisions. champlainanalytics.ca
+    </div>
+  </div>
+  <div class="footer-right">
+    © 2026 Champlain Analytics<br>
+    champlainanalytics.ca<br>
+    Issue #02 · Northern Bearing
+  </div>
+</footer>
+
+</body>
+</html>
